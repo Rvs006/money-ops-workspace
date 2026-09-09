@@ -1,0 +1,153 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Money Ops design specification</title><style>body{font:16px/1.6 system-ui;color:#242a27;background:#fff;margin:24px auto;padding:0 24px;max-width:1040px}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}</style><main><pre>---
+version: alpha
+name: Money Ops Review System
+description: A native decision workspace with editable inputs and visible financial tradeoffs.
+colors:
+  primary: &quot;#304b3c&quot;
+  surface: &quot;#ffffff&quot;
+  surface-container: &quot;#edf4ef&quot;
+  on-surface: &quot;#242a27&quot;
+  on-surface-variant: &quot;#505a54&quot;
+  outline: &quot;#505a54&quot;
+  outline-variant: &quot;#c7d4cc&quot;
+  error: &quot;#8a3028&quot;
+  chart-reserve: &quot;#769180&quot;
+  chart-premium: &quot;#c6a36a&quot;
+  chart-baseline: &quot;#a7b5ac&quot;
+typography:
+  display-lg: {fontFamily: system-ui, fontSize: 42px, fontWeight: 700, lineHeight: 50px}
+  headline-lg: {fontFamily: system-ui, fontSize: 30px, fontWeight: 700, lineHeight: 36px}
+  headline-md: {fontFamily: system-ui, fontSize: 24px, fontWeight: 600, lineHeight: 30px}
+  body-lg: {fontFamily: system-ui, fontSize: 18px, fontWeight: 400, lineHeight: 27px}
+  body-md: {fontFamily: system-ui, fontSize: 16px, fontWeight: 400, lineHeight: 24px}
+  body-sm: {fontFamily: system-ui, fontSize: 14px, fontWeight: 400, lineHeight: 21px}
+  label-md: {fontFamily: system-ui, fontSize: 16px, fontWeight: 600, lineHeight: 24px}
+  label-sm: {fontFamily: system-ui, fontSize: 12px, fontWeight: 500, lineHeight: 18px}
+rounded:
+  none: 0px
+  sm: 8px
+  md: 12px
+  lg: 24px
+spacing:
+  none: 0px
+  xxs: 4px
+  xs: 8px
+  sm: 12px
+  md: 16px
+  lg: 24px
+  xl: 32px
+  xxl: 48px
+components:
+  button-primary:
+    backgroundColor: &quot;{colors.primary}&quot;
+    textColor: &quot;{colors.surface}&quot;
+    typography: &quot;{typography.label-md}&quot;
+    rounded: &quot;{rounded.md}&quot;
+    padding: 16px
+    height: 48px
+  button-quiet:
+    backgroundColor: &quot;{colors.surface}&quot;
+    textColor: &quot;{colors.primary}&quot;
+    typography: &quot;{typography.label-md}&quot;
+    rounded: &quot;{rounded.md}&quot;
+    padding: 12px
+    height: 48px
+  loan-summary:
+    backgroundColor: &quot;{colors.surface}&quot;
+    textColor: &quot;{colors.on-surface}&quot;
+    rounded: &quot;{rounded.none}&quot;
+    padding: 24px
+  input:
+    backgroundColor: &quot;{colors.surface}&quot;
+    textColor: &quot;{colors.on-surface}&quot;
+    typography: &quot;{typography.body-lg}&quot;
+    rounded: &quot;{rounded.md}&quot;
+    padding: 16px
+    height: 48px
+  comparison:
+    backgroundColor: &quot;{colors.surface-container}&quot;
+    textColor: &quot;{colors.on-surface}&quot;
+    typography: &quot;{typography.body-md}&quot;
+    rounded: &quot;{rounded.md}&quot;
+    padding: 16px
+---
+
+## Brand &amp; Style
+
+Scope is only `mockups/finance-native`, the Money Ops prototype. Other ProductOS identity templates in this repository describe SAM and do not govern this app. The product intent is in FINANCIAL-PRODUCT-REVISION.md and the user&#x27;s current instructions. Name and tagline are Money Ops / Know what to do with your debt.
+
+This documents the existing native palette and consolidates the UI around a loan decision. It is a review baseline, not approval of a production identity. ProductOS Design System from Code supplied the extraction method; Design Better supplies hierarchy, interaction and accessibility checks.
+
+## Colors
+
+The existing theme is the source for the colours above. White is the continuous working surface; ink carries the loan context and outcomes. Primary green marks the main action and the repayment scenario. Error text uses the existing dark red. No gradients, ambient glow or default shadows.
+
+Inputs and meaningful chart strokes use on-surface-variant rather than the low-contrast decorative outline. The current comparison uses three horizontal bars on one scale, with exact rupee labels. The selected option uses primary green; the other bars use on-surface-variant. Zero interest has no filled bar. Legacy allocation colours remain available but are not used on the current screen.
+
+## Typography
+
+Use the platform system font as an interface workhorse. Identity comes from the existing bespoke bare SVG logo, not a newly downloaded display font. Native uses its system default, while the web preview resolves its system sans. The eight levels above map to `ui.type` and `ui.leading`; regular, medium, strong and bold weights are 400, 500, 600 and 700.
+
+Use tabular numbers. Avoid uppercase metadata and large promotional statements. Never reduce real comparison figures below body-sm to force columns to fit.
+
+## Layout &amp; Spacing
+
+Use a 4px base and the documented spacing scale. The working canvas has a 1040px maximum width. At widths below 800px, input and result columns stack in source order; expanded evidence uses the 680px reading measure. Minimum comparison columns are 280px before stacking. These layout roles are the new patterns introduced by the requested redo, implemented in `ui.layout`.
+
+The app has one page. A payment field updates the recommendation and three interest bars immediately. Loan editing, spare-money calculation, reasoning and insurance evidence expand in place. Insurance remains independent of loan input. Charts stay next to the figures they explain. Do not make people scroll through a household dashboard before trying a loan question.
+
+## Elevation &amp; Depth
+
+Use tonal surface changes, not shadows. The loan summary is a plain contextual row. Only the selected comparison gets a tonal surface, keeping the payment and result visually connected. Do not add glass, noisy backgrounds or floating decorative objects to a financial form.
+
+## Shapes
+
+Buttons and inputs use the 12px radius. The account summary has no enclosing panel. Small selectable rows use 8px. Chart geometry comes from plotted data, not decorative CSS shapes. Numerical bounds are mathematical rather than spacing tokens.
+
+## Components
+
+**button-primary:** one visually dominant action per view. Minimum 48px touch height; tone changes on hover/press; 2px visible focus. Invalid actions are disabled at 0.45 opacity with a nearby explanation.
+
+**button-quiet:** secondary navigation and disclosure with the same touch floor and focus treatment. Never use filled-plus-outlined button pairs.
+
+**loan-summary:** plain account context with balance, interest rate and remaining term. Edit opens labelled fields inline.
+
+**input:** visible label, numeric keyboard, blur validation, native focus. The 2px outline uses on-surface-variant; focus uses primary. Preserve in-memory input when disclosures close. No placeholder-only labels.
+
+**comparison:** three aligned horizontal interest bars: No part-payment, Finish earlier and Lower EMI. The latter two are selectable buttons with a visible selected state. Selecting one changes the outcome sentence above the chart. Show no-prepayment, shorter-term and lower-EMI values from one unrounded calculation. Prose gives the conditions behind an outcome. Current prototype assumes no fees or tax effects.
+
+## Do&#x27;s and Don&#x27;ts
+
+- Do keep data synthetic until the user edits the local scenario; never persist it.
+- Do put both repayment outcomes on one view and show their assumptions.
+- Do keep real text visible without relying on entrance animations.
+- Do provide numeric labels alongside every chart and keep the final payment accurate.
+- Do test zero interest, zero/full prepayment, shortfall and invalid input.
+- Don&#x27;t add arbitrary financial-health scores or pretend upload controls.
+- Don&#x27;t hide policy evidence in a tooltip or make insurance depend on loan input.
+- Don&#x27;t claim the full product MVP is complete. This is a UI and calculation prototype.
+
+## Reference provenance and application
+
+The Pleo and Feather observations are recorded separately in [PLEO-DESIGN.md](design-references/PLEO-DESIGN.md) and [FEATHER-DESIGN.md](design-references/FEATHER-DESIGN.md). They contain sampled live browser styles, not complete Context.dev exports. Context.dev was reported connected on 8 September 2026, but no connector extraction tools were exposed in this session.
+
+Borrow Pleo&#x27;s clear hierarchy and Feather&#x27;s short explanations. Keep Money Ops focused on a working decision rather than a marketing homepage. Reference fonts, photographs, logos and brand colours have not been installed or copied.
+
+| Before | After | Why |
+| --- | --- | --- |
+| Several navigation paths | One page with inline disclosures | Keep the decision in view |
+| Dense text and multiple chart types | Three comparable interest bars | Show the cost difference directly |
+| Separate result explanation | One outcome sentence with optional reasoning | Give the answer before the detail |
+
+## Policy-first revision: 8 September 2026
+
+The primary value proposition becomes “Make sense of your policy.” The first section accepts policy wording and surfaces matching passages under six everyday questions. The loan comparison follows below and remains independently usable. This supersedes the loan-first order above.
+
+DocumentReview uses the existing system tokens: title/section/body/small typography, green action, white canvas, wash for expanded evidence, 48px controls, 8px corners and 24px section gaps. There are no new visual tokens. One solid file-selection action is followed by a quiet sample action. Six full-width disclosure rows show topic names and matching-passage counts, with clear missing-text states rather than coverage ticks. Evidence is plain text, never rendered HTML.
+
+AnyDoc 0.2.4 runs in a self-hosted browser worker. Files are never sent to an extraction service. This first implementation accepts English public policy-wording documents without buyer details: PDF, DOCX, DOC and RTF, up to 5 MB. Scans and password-protected files get actionable errors. Clear terminates processing and removes the in-memory review. No document names, storage, analytics or hosted OCR. Common identifier redaction is defence in depth, not a promise of complete anonymisation.
+
+The review is a keyword-based reading guide, not an AI interpretation or coverage decision. Every topic shows the relevant source text with an extracted-paragraph locator, and missing matches mean “not found”, never “not covered”. Help text explains what to check rather than fabricating policy facts. Local PDF export includes the same limitations. User-authorised exports are the only saved outputs.
+
+Native React Native builds retain an honest web-only notice for document reading; the browser worker is not loaded on native. The loan tools continue to use native components.
+</pre></main></html>

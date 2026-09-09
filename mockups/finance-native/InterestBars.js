@@ -1,8 +1,6 @@
 import React from 'react';
 import {Pressable,StyleSheet,Text,View} from 'react-native';
 import Svg,{Rect} from 'react-native-svg';
-import {createLibrary,defineComponent,Renderer} from '@openuidev/react-lang';
-import {z} from 'zod/v4';
 import {t,ui} from './theme';
 
 const money=(value)=>'₹'+Math.round(Math.max(0,value)).toLocaleString('en-IN');
@@ -21,18 +19,8 @@ function BarVisual({props}){
  </View>;
 }
 
-const BarComponent=defineComponent({
- name:'BarVisual',
- description:'A compact native horizontal bar comparing remaining loan interest with exact numbers.',
- props:z.object({label:z.string(),value:z.number(),maximum:z.number(),detail:z.string(),active:z.boolean()}),
- component:BarVisual,
-});
-const barsLibrary=createLibrary({components:[BarComponent],root:'BarVisual'});
-
-function program(row){return `root = BarVisual("${row.label}", ${row.value}, ${row.maximum}, "${row.detail}", ${row.active})`;}
-
 function BarRow({row,onPress}){
- const output=<Renderer response={program(row)} library={barsLibrary} isStreaming={false} publishObservability={false}/>;
+ const output=<BarVisual props={row}/>;
  if(!onPress)return <View style={styles.staticRow}>{output}</View>;
  return <Pressable accessibilityRole="button" accessibilityLabel={`${row.label}. ${money(row.value)} interest. ${row.detail}`} accessibilityState={{selected:row.active}} onPress={onPress} style={({pressed})=>[styles.choiceRow,row.active&&styles.choiceActive,pressed&&styles.pressed]}>{output}</Pressable>;
 }
@@ -47,7 +35,7 @@ export function InterestBars({comparison,selected='shorter',onSelect}){
  return <View style={styles.group}>{rows.map((row)=>{const complete={...row,maximum};return <BarRow key={row.key} row={complete} onPress={row.key==='baseline'?undefined:()=>onSelect?.(row.key)}/>;})}</View>;
 }
 
-export const __interestBarTestables={barsLibrary,program};
+export const __interestBarTestables={BarVisual};
 
 const styles=StyleSheet.create({
  group:{gap:ui.spacing.xs},staticRow:{paddingVertical:ui.spacing.sm,paddingHorizontal:ui.spacing.sm},choiceRow:{minHeight:ui.controls.height,paddingVertical:ui.spacing.sm,paddingHorizontal:ui.spacing.sm,borderRadius:ui.radius.small},choiceActive:{backgroundColor:t.wash},pressed:{opacity:.72},visual:{gap:ui.spacing.xxs},topline:{flexDirection:'row',alignItems:'baseline',justifyContent:'space-between',gap:ui.spacing.sm},label:{color:t.ink,fontSize:ui.type.body,fontWeight:ui.weight.medium},activeText:{fontWeight:ui.weight.bold},amount:{color:t.ink,fontSize:ui.type.body,fontWeight:ui.weight.bold,fontVariant:['tabular-nums']},detail:{color:t.muted,fontSize:ui.type.caption,lineHeight:ui.leading.caption}

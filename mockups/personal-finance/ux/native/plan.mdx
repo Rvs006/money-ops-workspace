@@ -1,0 +1,403 @@
+---
+# Visual plan: open https://plan.agent-native.com/plans/plan-e6289e388e894e47 in a browser for the canvas and review UI.
+visualUrl: "https://plan.agent-native.com/plans/plan-e6289e388e894e47"
+title: "Personal finance — UX exploration"
+brief: "Compare a question-led walkthrough with a household overview. Synthetic examples, no personal intake."
+version: 2
+---
+
+<RichText id="prototype-plan-overview-590ba7e5" title="Visual Plan" editable>
+
+## Question
+
+Compare a question-led walkthrough with a household overview. Synthetic examples, no personal intake.
+
+## Prototype Review
+
+Use the functional prototype above like a small app: type into fields, press buttons, toggle rows, and try the core behavior. The static mocks below are reference frames for specific details, while implementation details and risks stay in the document.
+
+## Inspired By Prototype Discipline
+
+This plan treats the prototype as a way to answer a concrete question: what should the interaction feel like before implementation hardens it.
+
+</RichText>
+
+<TabsBlock
+  id="prototype-static-mocks-db440812"
+  title="Static Mocks"
+  tabs={[
+    {
+      id: "guided",
+      label: "Guided",
+      blocks: [
+        {
+          id: "guided-static-mock-b3d1369b",
+          title: "Guided Static Mock",
+          summary: "Static reference for the live prototype screen above.",
+          type: "wireframe",
+          data: {
+            surface: "browser",
+            renderMode: "design",
+            caption: "Static screen reference from the prototype.",
+            html: '<nav aria-label="Review directions" class="native-picker"><button data-goto="guided">Guided</button><button data-goto="overview">Overview</button></nav><main class="finance"><header><button class="back" data-goto="overview">‹ Back</button><p>Personal finance<br>Sample walkthrough</p></header><h1>What is on your mind?</h1><p>Choose one question. We’ll walk through a sample answer with you.</p><div class="choices"><button class="choice" data-goto="loan-goal"><b>Can I reduce my loan burden?</b><small>Compare a smaller EMI with finishing earlier.</small><span aria-hidden="true">›</span></button><button class="choice" data-goto="policy"><b>What does my policy cover?</b><small>See the benefits, limits and exact wording.</small><span aria-hidden="true">›</span></button><button class="choice" data-goto="money"><b>I have money left over.</b><small>Check what can be used after commitments.</small><span aria-hidden="true">›</span></button></div><p class="quiet">You can try any path. No signup or documents.</p><footer>Made-up loan and policy details. No personal documents needed.</footer></main>',
+            css: "\n:root,.finance{--paper:#fff;--ink:#242a27;--muted:#505a54;--wash:#edf4ef;--action:#304b3c;--space:24px;--radius:6px;--font:system-ui,sans-serif;--body:16px;--title:32px;--small:14px;--gap:16px;--tight:8px;--large:48px;--reading:720px;--touch:44px}\n.finance{font:var(--body)/1.6 var(--font);color:var(--ink);background:var(--paper);max-width:var(--reading);margin:auto;padding:var(--space)}\n.finance *{box-sizing:border-box}.finance header{display:flex;align-items:center;justify-content:space-between;gap:var(--gap);margin-bottom:var(--large)}.finance header p{margin:0;color:var(--muted);font-size:var(--small)}.finance h1{font-size:var(--title);line-height:1.2;margin:var(--gap) 0}.finance h2{font-size:var(--space);line-height:1.3;margin:var(--space) 0 var(--gap)}.finance p{max-width:65ch;margin:var(--gap) 0}.finance button,.finance summary{font:inherit;cursor:pointer;min-height:var(--touch)}.finance button{border:0;border-radius:var(--radius);padding:var(--tight) var(--gap);background:var(--action);color:var(--paper)}.finance button:hover{background:var(--ink)}.finance .back{background:transparent;color:var(--ink);padding-left:0}.finance button:focus-visible,.finance summary:focus-visible{outline:3px solid var(--action);outline-offset:3px}.finance .choices{display:grid;gap:var(--gap);margin:var(--space) 0}.finance .choice{text-align:left;padding:var(--space);background:var(--wash);color:var(--ink);display:grid;grid-template-columns:1fr auto;align-items:center;gap:var(--tight)}.finance .choice:hover{background:var(--action);color:var(--paper)}.finance .choice b{font-size:var(--space);font-weight:600}.finance .choice small{display:block;font-size:var(--body);font-weight:400;grid-column:1}.finance .choice span{grid-column:2;grid-row:1/3}.finance .quiet{color:var(--muted);font-size:var(--small)}.finance .ledger{background:var(--wash);padding:var(--space);margin:var(--space) 0}.finance dl{margin:0}.finance dl div{display:flex;justify-content:space-between;gap:var(--gap);padding:var(--gap) 0;align-items:baseline}.finance dt{flex:1}.finance dd{margin:0;font-variant-numeric:tabular-nums;white-space:nowrap}.finance .total{font-size:var(--space);font-weight:650}.finance .big{font-size:var(--large);line-height:1.15;font-variant-numeric:tabular-nums;margin:var(--gap) 0}.finance details{margin:var(--space) 0}.finance summary{padding:var(--tight) 0;font-weight:600}.finance blockquote{margin:var(--gap) 0;padding:var(--gap);background:var(--wash)}.finance .actions{display:flex;flex-wrap:wrap;gap:var(--gap);margin-top:var(--space)}.finance table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}.finance th,.finance td{padding:var(--gap) var(--tight);text-align:left;vertical-align:top}.finance th{background:var(--wash)}.finance footer{margin-top:var(--large);font-size:var(--small);color:var(--muted)}@media(max-width:520px){.finance{--space:20px;--large:36px;--title:28px;--gap:12px}.finance header{align-items:flex-start}.finance .choice b{font-size:20px}.finance th,.finance td{font-size:14px;padding:12px 4px}}\n.native-picker{display:flex;gap:16px;padding:16px;justify-content:center;background:#edf4ef}.native-picker button{font:16px system-ui;min-height:44px;border:0;background:transparent;color:#242a27;cursor:pointer}",
+            screen: [],
+          },
+        },
+      ],
+    },
+    {
+      id: "overview",
+      label: "Overview",
+      blocks: [
+        {
+          id: "overview-static-mock-9eeb20b7",
+          title: "Overview Static Mock",
+          summary: "Static reference for the live prototype screen above.",
+          type: "wireframe",
+          data: {
+            surface: "browser",
+            renderMode: "design",
+            caption: "Static screen reference from the prototype.",
+            html: '<nav aria-label="Review directions" class="native-picker"><button data-goto="guided">Guided</button><button data-goto="overview">Overview</button></nav><main class="finance"><header><button class="back" data-goto="guided">‹ Back</button><p>Personal finance<br>Sample walkthrough</p></header><h1>Your next money decision</h1><p>This sample has ₹2 lakh available, one loan and an upcoming insurance premium.</p><div class="ledger"><dl><div><dt>Available today</dt><dd>₹2,00,000</dd></div><div><dt>Reserve top-up chosen</dt><dd>− ₹70,000</dd></div><div><dt>Unfunded premium</dt><dd>− ₹30,000</dd></div><div class="total"><dt>Left to consider</dt><dd>₹1,00,000</dd></div></dl><button data-goto="money-result">Review this money plan</button></div><h2>Look closer</h2><div class="choices"><button class="choice" data-goto="loan-goal"><b>Loan: ₹1,20,000 remaining</b><small>Compare what a ₹20,000 payment changes.</small><span aria-hidden="true">›</span></button><button class="choice" data-goto="policy"><b>Health cover: ₹5 lakh</b><small>Check exclusions before relying on the cover.</small><span aria-hidden="true">›</span></button></div><footer>Made-up loan and policy details. No personal documents needed.</footer></main>',
+            css: "\n:root,.finance{--paper:#fff;--ink:#242a27;--muted:#505a54;--wash:#edf4ef;--action:#304b3c;--space:24px;--radius:6px;--font:system-ui,sans-serif;--body:16px;--title:32px;--small:14px;--gap:16px;--tight:8px;--large:48px;--reading:720px;--touch:44px}\n.finance{font:var(--body)/1.6 var(--font);color:var(--ink);background:var(--paper);max-width:var(--reading);margin:auto;padding:var(--space)}\n.finance *{box-sizing:border-box}.finance header{display:flex;align-items:center;justify-content:space-between;gap:var(--gap);margin-bottom:var(--large)}.finance header p{margin:0;color:var(--muted);font-size:var(--small)}.finance h1{font-size:var(--title);line-height:1.2;margin:var(--gap) 0}.finance h2{font-size:var(--space);line-height:1.3;margin:var(--space) 0 var(--gap)}.finance p{max-width:65ch;margin:var(--gap) 0}.finance button,.finance summary{font:inherit;cursor:pointer;min-height:var(--touch)}.finance button{border:0;border-radius:var(--radius);padding:var(--tight) var(--gap);background:var(--action);color:var(--paper)}.finance button:hover{background:var(--ink)}.finance .back{background:transparent;color:var(--ink);padding-left:0}.finance button:focus-visible,.finance summary:focus-visible{outline:3px solid var(--action);outline-offset:3px}.finance .choices{display:grid;gap:var(--gap);margin:var(--space) 0}.finance .choice{text-align:left;padding:var(--space);background:var(--wash);color:var(--ink);display:grid;grid-template-columns:1fr auto;align-items:center;gap:var(--tight)}.finance .choice:hover{background:var(--action);color:var(--paper)}.finance .choice b{font-size:var(--space);font-weight:600}.finance .choice small{display:block;font-size:var(--body);font-weight:400;grid-column:1}.finance .choice span{grid-column:2;grid-row:1/3}.finance .quiet{color:var(--muted);font-size:var(--small)}.finance .ledger{background:var(--wash);padding:var(--space);margin:var(--space) 0}.finance dl{margin:0}.finance dl div{display:flex;justify-content:space-between;gap:var(--gap);padding:var(--gap) 0;align-items:baseline}.finance dt{flex:1}.finance dd{margin:0;font-variant-numeric:tabular-nums;white-space:nowrap}.finance .total{font-size:var(--space);font-weight:650}.finance .big{font-size:var(--large);line-height:1.15;font-variant-numeric:tabular-nums;margin:var(--gap) 0}.finance details{margin:var(--space) 0}.finance summary{padding:var(--tight) 0;font-weight:600}.finance blockquote{margin:var(--gap) 0;padding:var(--gap);background:var(--wash)}.finance .actions{display:flex;flex-wrap:wrap;gap:var(--gap);margin-top:var(--space)}.finance table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}.finance th,.finance td{padding:var(--gap) var(--tight);text-align:left;vertical-align:top}.finance th{background:var(--wash)}.finance footer{margin-top:var(--large);font-size:var(--small);color:var(--muted)}@media(max-width:520px){.finance{--space:20px;--large:36px;--title:28px;--gap:12px}.finance header{align-items:flex-start}.finance .choice b{font-size:20px}.finance th,.finance td{font-size:14px;padding:12px 4px}}\n.native-picker{display:flex;gap:16px;padding:16px;justify-content:center;background:#edf4ef}.native-picker button{font:16px system-ui;min-height:44px;border:0;background:transparent;color:#242a27;cursor:pointer}",
+            screen: [],
+          },
+        },
+      ],
+    },
+    {
+      id: "loan-goal",
+      label: "Choose repayment priority",
+      blocks: [
+        {
+          id: "loan-goal-static-mock-2b0447a6",
+          title: "Choose repayment priority Static Mock",
+          summary: "Static reference for the live prototype screen above.",
+          type: "wireframe",
+          data: {
+            surface: "browser",
+            renderMode: "design",
+            caption: "Static screen reference from the prototype.",
+            html: '<nav aria-label="Review directions" class="native-picker"><button data-goto="guided">Guided</button><button data-goto="overview">Overview</button></nav><main class="finance"><header><button class="back" data-goto="guided">‹ Back</button><p>Personal finance<br>Sample walkthrough</p></header><p class="quiet">Loan comparison · Choose your priority</p><h1>What would help you more?</h1><p>In this example, you pay ₹20,000 towards the loan today.</p><details><summary>See the sample loan details</summary><dl><div><dt>Balance before payment</dt><dd>₹1,20,000</dd></div><div><dt>Annual reducing rate</dt><dd>12%</dd></div><div><dt>Payments remaining</dt><dd>12 months</dd></div><div><dt>Current EMI</dt><dd>₹10,662</dd></div></dl><p>No prepayment fee. Monthly interest, payment before the next interest period. Figures rounded to rupees.</p></details><div class="choices"><button class="choice" data-goto="loan-fast"><b>Finish the loan earlier</b><small>I can continue paying the current EMI.</small><span aria-hidden="true">›</span></button><button class="choice" data-goto="loan-light"><b>Reduce my monthly EMI</b><small>I want more breathing room each month.</small><span aria-hidden="true">›</span></button></div><footer>Made-up loan and policy details. No personal documents needed.</footer></main>',
+            css: "\n:root,.finance{--paper:#fff;--ink:#242a27;--muted:#505a54;--wash:#edf4ef;--action:#304b3c;--space:24px;--radius:6px;--font:system-ui,sans-serif;--body:16px;--title:32px;--small:14px;--gap:16px;--tight:8px;--large:48px;--reading:720px;--touch:44px}\n.finance{font:var(--body)/1.6 var(--font);color:var(--ink);background:var(--paper);max-width:var(--reading);margin:auto;padding:var(--space)}\n.finance *{box-sizing:border-box}.finance header{display:flex;align-items:center;justify-content:space-between;gap:var(--gap);margin-bottom:var(--large)}.finance header p{margin:0;color:var(--muted);font-size:var(--small)}.finance h1{font-size:var(--title);line-height:1.2;margin:var(--gap) 0}.finance h2{font-size:var(--space);line-height:1.3;margin:var(--space) 0 var(--gap)}.finance p{max-width:65ch;margin:var(--gap) 0}.finance button,.finance summary{font:inherit;cursor:pointer;min-height:var(--touch)}.finance button{border:0;border-radius:var(--radius);padding:var(--tight) var(--gap);background:var(--action);color:var(--paper)}.finance button:hover{background:var(--ink)}.finance .back{background:transparent;color:var(--ink);padding-left:0}.finance button:focus-visible,.finance summary:focus-visible{outline:3px solid var(--action);outline-offset:3px}.finance .choices{display:grid;gap:var(--gap);margin:var(--space) 0}.finance .choice{text-align:left;padding:var(--space);background:var(--wash);color:var(--ink);display:grid;grid-template-columns:1fr auto;align-items:center;gap:var(--tight)}.finance .choice:hover{background:var(--action);color:var(--paper)}.finance .choice b{font-size:var(--space);font-weight:600}.finance .choice small{display:block;font-size:var(--body);font-weight:400;grid-column:1}.finance .choice span{grid-column:2;grid-row:1/3}.finance .quiet{color:var(--muted);font-size:var(--small)}.finance .ledger{background:var(--wash);padding:var(--space);margin:var(--space) 0}.finance dl{margin:0}.finance dl div{display:flex;justify-content:space-between;gap:var(--gap);padding:var(--gap) 0;align-items:baseline}.finance dt{flex:1}.finance dd{margin:0;font-variant-numeric:tabular-nums;white-space:nowrap}.finance .total{font-size:var(--space);font-weight:650}.finance .big{font-size:var(--large);line-height:1.15;font-variant-numeric:tabular-nums;margin:var(--gap) 0}.finance details{margin:var(--space) 0}.finance summary{padding:var(--tight) 0;font-weight:600}.finance blockquote{margin:var(--gap) 0;padding:var(--gap);background:var(--wash)}.finance .actions{display:flex;flex-wrap:wrap;gap:var(--gap);margin-top:var(--space)}.finance table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}.finance th,.finance td{padding:var(--gap) var(--tight);text-align:left;vertical-align:top}.finance th{background:var(--wash)}.finance footer{margin-top:var(--large);font-size:var(--small);color:var(--muted)}@media(max-width:520px){.finance{--space:20px;--large:36px;--title:28px;--gap:12px}.finance header{align-items:flex-start}.finance .choice b{font-size:20px}.finance th,.finance td{font-size:14px;padding:12px 4px}}\n.native-picker{display:flex;gap:16px;padding:16px;justify-content:center;background:#edf4ef}.native-picker button{font:16px system-ui;min-height:44px;border:0;background:transparent;color:#242a27;cursor:pointer}",
+            screen: [],
+          },
+        },
+      ],
+    },
+    {
+      id: "loan-fast",
+      label: "Finish earlier result",
+      blocks: [
+        {
+          id: "loan-fast-static-mock-4a876264",
+          title: "Finish earlier result Static Mock",
+          summary: "Static reference for the live prototype screen above.",
+          type: "wireframe",
+          data: {
+            surface: "browser",
+            renderMode: "design",
+            caption: "Static screen reference from the prototype.",
+            html: '<nav aria-label="Review directions" class="native-picker"><button data-goto="guided">Guided</button><button data-goto="overview">Overview</button></nav><main class="finance"><header><button class="back" data-goto="loan-goal">‹ Back</button><p>Personal finance<br>Sample walkthrough</p></header><p class="quiet">Your choice: finish earlier</p><h1>Finish in 10 months</h1><p>Keep the EMI at about ₹10,662 after paying ₹20,000 now. The final payment is smaller.</p><div class="ledger"><dl><div><dt>Remaining term</dt><dd>12 → 10 months</dd></div><div><dt>Future interest</dt><dd>₹7,942 → ₹5,534</dd></div><div class="total"><dt>Interest saved</dt><dd>₹2,408</dd></div></dl></div><h2>Why this fits your choice</h2><p>You said the current EMI is manageable. Keeping it unchanged clears the balance sooner in this sample.</p><details><summary>How we worked this out</summary><p>₹1,20,000 − ₹20,000 = ₹1,00,000. Each month, interest is 1% of the opening balance, then the EMI is deducted. Continue until the balance reaches zero. No fees, tax adjustments or rate changes.</p></details><div class="actions"><button data-goto="loan-light">Compare a lower EMI</button><button class="back" data-goto="guided">Ask another question</button></div><footer>Made-up loan and policy details. No personal documents needed.</footer></main>',
+            css: "\n:root,.finance{--paper:#fff;--ink:#242a27;--muted:#505a54;--wash:#edf4ef;--action:#304b3c;--space:24px;--radius:6px;--font:system-ui,sans-serif;--body:16px;--title:32px;--small:14px;--gap:16px;--tight:8px;--large:48px;--reading:720px;--touch:44px}\n.finance{font:var(--body)/1.6 var(--font);color:var(--ink);background:var(--paper);max-width:var(--reading);margin:auto;padding:var(--space)}\n.finance *{box-sizing:border-box}.finance header{display:flex;align-items:center;justify-content:space-between;gap:var(--gap);margin-bottom:var(--large)}.finance header p{margin:0;color:var(--muted);font-size:var(--small)}.finance h1{font-size:var(--title);line-height:1.2;margin:var(--gap) 0}.finance h2{font-size:var(--space);line-height:1.3;margin:var(--space) 0 var(--gap)}.finance p{max-width:65ch;margin:var(--gap) 0}.finance button,.finance summary{font:inherit;cursor:pointer;min-height:var(--touch)}.finance button{border:0;border-radius:var(--radius);padding:var(--tight) var(--gap);background:var(--action);color:var(--paper)}.finance button:hover{background:var(--ink)}.finance .back{background:transparent;color:var(--ink);padding-left:0}.finance button:focus-visible,.finance summary:focus-visible{outline:3px solid var(--action);outline-offset:3px}.finance .choices{display:grid;gap:var(--gap);margin:var(--space) 0}.finance .choice{text-align:left;padding:var(--space);background:var(--wash);color:var(--ink);display:grid;grid-template-columns:1fr auto;align-items:center;gap:var(--tight)}.finance .choice:hover{background:var(--action);color:var(--paper)}.finance .choice b{font-size:var(--space);font-weight:600}.finance .choice small{display:block;font-size:var(--body);font-weight:400;grid-column:1}.finance .choice span{grid-column:2;grid-row:1/3}.finance .quiet{color:var(--muted);font-size:var(--small)}.finance .ledger{background:var(--wash);padding:var(--space);margin:var(--space) 0}.finance dl{margin:0}.finance dl div{display:flex;justify-content:space-between;gap:var(--gap);padding:var(--gap) 0;align-items:baseline}.finance dt{flex:1}.finance dd{margin:0;font-variant-numeric:tabular-nums;white-space:nowrap}.finance .total{font-size:var(--space);font-weight:650}.finance .big{font-size:var(--large);line-height:1.15;font-variant-numeric:tabular-nums;margin:var(--gap) 0}.finance details{margin:var(--space) 0}.finance summary{padding:var(--tight) 0;font-weight:600}.finance blockquote{margin:var(--gap) 0;padding:var(--gap);background:var(--wash)}.finance .actions{display:flex;flex-wrap:wrap;gap:var(--gap);margin-top:var(--space)}.finance table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}.finance th,.finance td{padding:var(--gap) var(--tight);text-align:left;vertical-align:top}.finance th{background:var(--wash)}.finance footer{margin-top:var(--large);font-size:var(--small);color:var(--muted)}@media(max-width:520px){.finance{--space:20px;--large:36px;--title:28px;--gap:12px}.finance header{align-items:flex-start}.finance .choice b{font-size:20px}.finance th,.finance td{font-size:14px;padding:12px 4px}}\n.native-picker{display:flex;gap:16px;padding:16px;justify-content:center;background:#edf4ef}.native-picker button{font:16px system-ui;min-height:44px;border:0;background:transparent;color:#242a27;cursor:pointer}",
+            screen: [],
+          },
+        },
+      ],
+    },
+    {
+      id: "loan-light",
+      label: "Lower EMI result",
+      blocks: [
+        {
+          id: "loan-light-static-mock-8da1a62d",
+          title: "Lower EMI result Static Mock",
+          summary: "Static reference for the live prototype screen above.",
+          type: "wireframe",
+          data: {
+            surface: "browser",
+            renderMode: "design",
+            caption: "Static screen reference from the prototype.",
+            html: '<nav aria-label="Review directions" class="native-picker"><button data-goto="guided">Guided</button><button data-goto="overview">Overview</button></nav><main class="finance"><header><button class="back" data-goto="loan-goal">‹ Back</button><p>Personal finance<br>Sample walkthrough</p></header><p class="quiet">Your choice: a smaller monthly payment</p><h1>Bring the EMI to ₹8,885</h1><p>After paying ₹20,000 now, keep the remaining term at 12 months.</p><div class="ledger"><dl><div><dt>Current EMI</dt><dd>₹10,662</dd></div><div><dt>New EMI</dt><dd>₹8,885</dd></div><div class="total"><dt>Monthly breathing room</dt><dd>₹1,777</dd></div></dl></div><h2>The trade-off</h2><p>You pay about ₹6,619 in future interest. That is ₹1,084 more than keeping the old EMI and finishing earlier.</p><details><summary>Check the calculation</summary><p>New balance ₹1,00,000. Monthly reducing rate 1%, 12 payments. EMI = P × r ÷ (1 − (1 + r)⁻ⁿ). No fees, tax adjustments or rate changes. Calculations use unrounded values; displayed rupee figures are rounded.</p></details><div class="actions"><button data-goto="loan-fast">Compare finishing earlier</button><button class="back" data-goto="guided">Ask another question</button></div><footer>Made-up loan and policy details. No personal documents needed.</footer></main>',
+            css: "\n:root,.finance{--paper:#fff;--ink:#242a27;--muted:#505a54;--wash:#edf4ef;--action:#304b3c;--space:24px;--radius:6px;--font:system-ui,sans-serif;--body:16px;--title:32px;--small:14px;--gap:16px;--tight:8px;--large:48px;--reading:720px;--touch:44px}\n.finance{font:var(--body)/1.6 var(--font);color:var(--ink);background:var(--paper);max-width:var(--reading);margin:auto;padding:var(--space)}\n.finance *{box-sizing:border-box}.finance header{display:flex;align-items:center;justify-content:space-between;gap:var(--gap);margin-bottom:var(--large)}.finance header p{margin:0;color:var(--muted);font-size:var(--small)}.finance h1{font-size:var(--title);line-height:1.2;margin:var(--gap) 0}.finance h2{font-size:var(--space);line-height:1.3;margin:var(--space) 0 var(--gap)}.finance p{max-width:65ch;margin:var(--gap) 0}.finance button,.finance summary{font:inherit;cursor:pointer;min-height:var(--touch)}.finance button{border:0;border-radius:var(--radius);padding:var(--tight) var(--gap);background:var(--action);color:var(--paper)}.finance button:hover{background:var(--ink)}.finance .back{background:transparent;color:var(--ink);padding-left:0}.finance button:focus-visible,.finance summary:focus-visible{outline:3px solid var(--action);outline-offset:3px}.finance .choices{display:grid;gap:var(--gap);margin:var(--space) 0}.finance .choice{text-align:left;padding:var(--space);background:var(--wash);color:var(--ink);display:grid;grid-template-columns:1fr auto;align-items:center;gap:var(--tight)}.finance .choice:hover{background:var(--action);color:var(--paper)}.finance .choice b{font-size:var(--space);font-weight:600}.finance .choice small{display:block;font-size:var(--body);font-weight:400;grid-column:1}.finance .choice span{grid-column:2;grid-row:1/3}.finance .quiet{color:var(--muted);font-size:var(--small)}.finance .ledger{background:var(--wash);padding:var(--space);margin:var(--space) 0}.finance dl{margin:0}.finance dl div{display:flex;justify-content:space-between;gap:var(--gap);padding:var(--gap) 0;align-items:baseline}.finance dt{flex:1}.finance dd{margin:0;font-variant-numeric:tabular-nums;white-space:nowrap}.finance .total{font-size:var(--space);font-weight:650}.finance .big{font-size:var(--large);line-height:1.15;font-variant-numeric:tabular-nums;margin:var(--gap) 0}.finance details{margin:var(--space) 0}.finance summary{padding:var(--tight) 0;font-weight:600}.finance blockquote{margin:var(--gap) 0;padding:var(--gap);background:var(--wash)}.finance .actions{display:flex;flex-wrap:wrap;gap:var(--gap);margin-top:var(--space)}.finance table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}.finance th,.finance td{padding:var(--gap) var(--tight);text-align:left;vertical-align:top}.finance th{background:var(--wash)}.finance footer{margin-top:var(--large);font-size:var(--small);color:var(--muted)}@media(max-width:520px){.finance{--space:20px;--large:36px;--title:28px;--gap:12px}.finance header{align-items:flex-start}.finance .choice b{font-size:20px}.finance th,.finance td{font-size:14px;padding:12px 4px}}\n.native-picker{display:flex;gap:16px;padding:16px;justify-content:center;background:#edf4ef}.native-picker button{font:16px system-ui;min-height:44px;border:0;background:transparent;color:#242a27;cursor:pointer}",
+            screen: [],
+          },
+        },
+      ],
+    },
+    {
+      id: "policy",
+      label: "Policy explained",
+      blocks: [
+        {
+          id: "policy-static-mock-b46d90a4",
+          title: "Policy explained Static Mock",
+          summary: "Static reference for the live prototype screen above.",
+          type: "wireframe",
+          data: {
+            surface: "browser",
+            renderMode: "design",
+            caption: "Static screen reference from the prototype.",
+            html: '<nav aria-label="Review directions" class="native-picker"><button data-goto="guided">Guided</button><button data-goto="overview">Overview</button></nav><main class="finance"><header><button class="back" data-goto="guided">‹ Back</button><p>Personal finance<br>Sample walkthrough</p></header><p class="quiet">Fictional health policy · Quick read</p><h1>What your cover includes</h1><div class="ledger"><dl><div><dt>Hospital treatment limit</dt><dd>₹5 lakh / year</dd></div><div><dt>Routine OPD visits</dt><dd>Not covered</dd></div><div><dt>Annual health checkup</dt><dd>Up to ₹2,000</dd></div></dl></div><h2>A benefit you can use</h2><p>The sample offers one checkup after completing a policy year, at an approved centre.</p><button data-goto="policy-proof">See the wording and conditions</button><h2>What still needs checking</h2><p>Waiting periods, claim conditions and booking contacts are missing from this sample. We cannot confirm them.</p><div class="actions"><button class="back" data-goto="guided">Ask another question</button></div><footer>Made-up loan and policy details. No personal documents needed.</footer></main>',
+            css: "\n:root,.finance{--paper:#fff;--ink:#242a27;--muted:#505a54;--wash:#edf4ef;--action:#304b3c;--space:24px;--radius:6px;--font:system-ui,sans-serif;--body:16px;--title:32px;--small:14px;--gap:16px;--tight:8px;--large:48px;--reading:720px;--touch:44px}\n.finance{font:var(--body)/1.6 var(--font);color:var(--ink);background:var(--paper);max-width:var(--reading);margin:auto;padding:var(--space)}\n.finance *{box-sizing:border-box}.finance header{display:flex;align-items:center;justify-content:space-between;gap:var(--gap);margin-bottom:var(--large)}.finance header p{margin:0;color:var(--muted);font-size:var(--small)}.finance h1{font-size:var(--title);line-height:1.2;margin:var(--gap) 0}.finance h2{font-size:var(--space);line-height:1.3;margin:var(--space) 0 var(--gap)}.finance p{max-width:65ch;margin:var(--gap) 0}.finance button,.finance summary{font:inherit;cursor:pointer;min-height:var(--touch)}.finance button{border:0;border-radius:var(--radius);padding:var(--tight) var(--gap);background:var(--action);color:var(--paper)}.finance button:hover{background:var(--ink)}.finance .back{background:transparent;color:var(--ink);padding-left:0}.finance button:focus-visible,.finance summary:focus-visible{outline:3px solid var(--action);outline-offset:3px}.finance .choices{display:grid;gap:var(--gap);margin:var(--space) 0}.finance .choice{text-align:left;padding:var(--space);background:var(--wash);color:var(--ink);display:grid;grid-template-columns:1fr auto;align-items:center;gap:var(--tight)}.finance .choice:hover{background:var(--action);color:var(--paper)}.finance .choice b{font-size:var(--space);font-weight:600}.finance .choice small{display:block;font-size:var(--body);font-weight:400;grid-column:1}.finance .choice span{grid-column:2;grid-row:1/3}.finance .quiet{color:var(--muted);font-size:var(--small)}.finance .ledger{background:var(--wash);padding:var(--space);margin:var(--space) 0}.finance dl{margin:0}.finance dl div{display:flex;justify-content:space-between;gap:var(--gap);padding:var(--gap) 0;align-items:baseline}.finance dt{flex:1}.finance dd{margin:0;font-variant-numeric:tabular-nums;white-space:nowrap}.finance .total{font-size:var(--space);font-weight:650}.finance .big{font-size:var(--large);line-height:1.15;font-variant-numeric:tabular-nums;margin:var(--gap) 0}.finance details{margin:var(--space) 0}.finance summary{padding:var(--tight) 0;font-weight:600}.finance blockquote{margin:var(--gap) 0;padding:var(--gap);background:var(--wash)}.finance .actions{display:flex;flex-wrap:wrap;gap:var(--gap);margin-top:var(--space)}.finance table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}.finance th,.finance td{padding:var(--gap) var(--tight);text-align:left;vertical-align:top}.finance th{background:var(--wash)}.finance footer{margin-top:var(--large);font-size:var(--small);color:var(--muted)}@media(max-width:520px){.finance{--space:20px;--large:36px;--title:28px;--gap:12px}.finance header{align-items:flex-start}.finance .choice b{font-size:20px}.finance th,.finance td{font-size:14px;padding:12px 4px}}\n.native-picker{display:flex;gap:16px;padding:16px;justify-content:center;background:#edf4ef}.native-picker button{font:16px system-ui;min-height:44px;border:0;background:transparent;color:#242a27;cursor:pointer}",
+            screen: [],
+          },
+        },
+      ],
+    },
+  ]}
+/>
+
+<Diagram
+  id="prototype-flow-dc307f51"
+  title="Prototype Flow"
+  data={{
+    nodes: [
+      {
+        id: "guided",
+        label: "Guided",
+      },
+      {
+        id: "overview",
+        label: "Overview",
+      },
+      {
+        id: "loan-goal",
+        label: "Choose repayment priority",
+      },
+      {
+        id: "loan-fast",
+        label: "Finish earlier result",
+      },
+      {
+        id: "loan-light",
+        label: "Lower EMI result",
+      },
+      {
+        id: "policy",
+        label: "Policy explained",
+      },
+      {
+        id: "policy-proof",
+        label: "Policy source and next step",
+      },
+      {
+        id: "money",
+        label: "Check premium funding",
+      },
+      {
+        id: "money-result",
+        label: "Money remaining",
+      },
+      {
+        id: "money-funded",
+        label: "Funded premium result",
+      },
+    ],
+    edges: [
+      {
+        from: "guided",
+        to: "overview",
+        label: "Continue",
+      },
+      {
+        from: "guided",
+        to: "loan-goal",
+        label: "Continue",
+      },
+      {
+        from: "guided",
+        to: "policy",
+        label: "Continue",
+      },
+      {
+        from: "guided",
+        to: "money",
+        label: "Continue",
+      },
+      {
+        from: "overview",
+        to: "guided",
+        label: "Continue",
+      },
+      {
+        from: "overview",
+        to: "money-result",
+        label: "Continue",
+      },
+      {
+        from: "overview",
+        to: "loan-goal",
+        label: "Continue",
+      },
+      {
+        from: "overview",
+        to: "policy",
+        label: "Continue",
+      },
+      {
+        from: "loan-goal",
+        to: "guided",
+        label: "Continue",
+      },
+      {
+        from: "loan-goal",
+        to: "loan-fast",
+        label: "Continue",
+      },
+      {
+        from: "loan-goal",
+        to: "loan-light",
+        label: "Continue",
+      },
+      {
+        from: "loan-fast",
+        to: "loan-goal",
+        label: "Continue",
+      },
+      {
+        from: "loan-fast",
+        to: "loan-light",
+        label: "Continue",
+      },
+      {
+        from: "loan-fast",
+        to: "guided",
+        label: "Continue",
+      },
+      {
+        from: "loan-light",
+        to: "loan-goal",
+        label: "Continue",
+      },
+      {
+        from: "loan-light",
+        to: "loan-fast",
+        label: "Continue",
+      },
+      {
+        from: "loan-light",
+        to: "guided",
+        label: "Continue",
+      },
+      {
+        from: "policy",
+        to: "guided",
+        label: "Continue",
+      },
+      {
+        from: "policy",
+        to: "policy-proof",
+        label: "Continue",
+      },
+      {
+        from: "policy",
+        to: "guided",
+        label: "Continue",
+      },
+      {
+        from: "policy-proof",
+        to: "policy",
+        label: "Continue",
+      },
+      {
+        from: "policy-proof",
+        to: "policy",
+        label: "Continue",
+      },
+      {
+        from: "money",
+        to: "guided",
+        label: "Continue",
+      },
+      {
+        from: "money",
+        to: "money-result",
+        label: "Continue",
+      },
+      {
+        from: "money",
+        to: "money-funded",
+        label: "Continue",
+      },
+      {
+        from: "money-result",
+        to: "money",
+        label: "Continue",
+      },
+      {
+        from: "money-result",
+        to: "loan-goal",
+        label: "Continue",
+      },
+      {
+        from: "money-result",
+        to: "money",
+        label: "Continue",
+      },
+      {
+        from: "money-result",
+        to: "guided",
+        label: "Continue",
+      },
+      {
+        from: "money-funded",
+        to: "money",
+        label: "Continue",
+      },
+      {
+        from: "money-funded",
+        to: "loan-goal",
+        label: "Continue",
+      },
+      {
+        from: "money-funded",
+        to: "money",
+        label: "Continue",
+      },
+      {
+        from: "money-funded",
+        to: "guided",
+        label: "Continue",
+      },
+    ],
+  }}
+/>
+
+<ImplementationMap
+  id="implementation-map-e58e1e17"
+  title="Implementation Map"
+  files={[
+    {
+      path: "repo/path.tsx",
+      title: "Files to inspect and update",
+      note: "Isolated emil-prototype exploration. Original baseline retained locally and in the first plan. Guided and Overview diverge on entry model; shared result screens make comparisons fair. Navigation-only state avoids hosted Alpine incompatibility. Figures are worked examples, not financial advice.",
+      language: "tsx",
+      snippet:
+        'const prototypeDecision = {\n  liveFlow: "reviewed in the prototype viewer",\n  implementation: "rewrite the chosen behavior in production components",\n};',
+    },
+  ]}
+/>
+
+<Checklist
+  id="verification-4f7346b6"
+  title="Verification"
+  items={[
+    {
+      id: "prototype-clicks",
+      label:
+        "Click every prototype transition and confirm the expected screen, state chips, and back/forward behavior.",
+    },
+    {
+      id: "comments",
+      label:
+        "Place at least one comment on the prototype and confirm agent feedback includes an exact prototype target.",
+    },
+    {
+      id: "implementation",
+      label:
+        "After approval, rewrite the chosen behavior in production code rather than copying throwaway prototype markup.",
+    },
+  ]}
+/>

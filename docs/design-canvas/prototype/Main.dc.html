@@ -1,0 +1,750 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
+    a { color: #1947c7; } a:hover { color: #182640; }
+    .money-app{--ink:#182640;--muted:#50617b;--blue:#1947c7;--paper:#ffffff;--wash:#f1f5ff;--line:#bdcbea;--error:#8a3028;--field-surface:#e9e9e9;--field-edge:#c5c5c5;--on-action:#ffffff;--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s6:24px;--s8:32px;--s12:48px;--radius:12px;--body:16px;--small:14px;--title:36px;--section:24px;--max:1120px;--motion-press:120ms;--ease-press:cubic-bezier(.23,1,.32,1);--motion-ui:160ms;--motion-fade:140ms;--press-scale:.98;--chevron:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M6 3.5 10.5 8 6 12.5' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");width:100%;min-height:100vh;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:var(--body);line-height:1.5}
+    .money-app[data-theme=dark]{color-scheme:dark;--paper:#191919;--wash:#252525;--ink:#f2f2f2;--muted:#b9b9b9;--blue:#a9c0ff;--line:#505050;--error:#ffb4a9;--field-surface:#353535;--field-edge:#686868;--on-action:#151515}
+    .money-app *{box-sizing:border-box}
+    /* The runtime wraps every interpolated value in span.sc-interp; it must inherit, never be styled as a span. */
+    .money-app span.sc-interp{font:inherit!important;color:inherit!important;letter-spacing:inherit!important;display:inline!important;padding:0!important}
+    .money-app button,.money-app input,.money-app select{font:inherit}
+    .money-app button{cursor:pointer}
+    .money-app ::selection{background:color-mix(in srgb,var(--blue) 24%,transparent)}
+    .money-app button:focus-visible,.money-app input:focus-visible,.money-app select:focus-visible,.money-app summary:focus-visible,.money-app a:focus-visible,.money-app label.primary:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:var(--s1)}
+    .money-app h1,.money-app h2,.money-app h3,.money-app h4,.money-app p{margin:0}
+    .money-app h1{font-size:var(--title);line-height:1.18;letter-spacing:-.02em;font-weight:650}
+    .money-app h2{font-size:var(--section);line-height:1.3;font-weight:650}
+    .money-app h3{font-size:18px;line-height:1.5}
+    .money-app p{line-height:1.6}
+    .app-header{max-width:var(--max);margin:auto;display:flex;align-items:center;gap:var(--s6);padding:var(--s6) var(--s8)}
+    .brand{display:flex;align-items:center;gap:var(--s3);color:var(--ink);font-weight:700;font-size:var(--section)}
+    .brand>a{color:var(--ink);text-decoration:none}
+    .logo{display:block;width:64px;height:70.4px;flex:none}
+    .logo-rail{animation:money-scan 3s ease-in-out infinite alternate}
+    @keyframes money-scan{from{transform:translateY(-9px)}to{transform:translateY(9px)}}
+    .header-tools{margin-left:auto;display:flex;align-items:center;gap:var(--s4)}
+    .preview-label{color:var(--muted);font-size:var(--small)}
+    .theme-toggle{display:flex;align-items:center;justify-content:space-between;gap:var(--s2);min-width:100px;min-height:48px;padding:var(--s2);color:var(--ink);background:transparent;border:0;font-size:var(--small);transition:color var(--motion-press) ease}
+    .theme-switch-track{display:flex;align-items:center;width:40px;height:24px;padding:var(--s1);border-radius:var(--radius);background:var(--field-edge);transition:background-color var(--motion-ui) ease}
+    .theme-switch-track>span{width:16px;height:16px;border-radius:50%;background:var(--ink);transition:transform var(--motion-ui) var(--ease-press)}
+    .theme-toggle[aria-checked=true] .theme-switch-track>span{transform:translateX(16px)}
+    .app-nav{max-width:var(--max);padding:var(--s3) var(--s8);margin:auto;display:flex;align-items:center;gap:var(--s8);position:sticky;top:0;z-index:5;background:var(--paper)}
+    .app-nav::after{content:"";position:absolute;left:0;right:0;top:100%;height:14px;background:linear-gradient(var(--paper),transparent);pointer-events:none}
+    .app-nav a{display:inline-flex;flex-direction:column;justify-content:center;min-height:48px;font-size:var(--small);font-weight:600;text-decoration:none;color:var(--muted);transition:color var(--motion-press) ease;cursor:pointer}
+    .app-nav a::after{content:attr(data-label);font-weight:750;height:0;overflow:hidden;visibility:hidden;pointer-events:none}
+    .app-nav a[aria-current=location]{color:var(--ink);font-weight:750}
+    .workspace{max-width:var(--max);margin:auto;padding:var(--s8)}
+    .page-title{max-width:var(--max);margin-bottom:var(--s6);display:grid;gap:var(--s3)}
+    .page-title p{max-width:760px}
+    .muted,.money-app small,.small{color:var(--muted)}
+    .money-app small,.small{font-size:var(--small)}
+    .quiet{border:0;background:none;color:var(--blue);padding:var(--s3) 0;text-align:left;font-weight:600;min-height:48px;transition:color var(--motion-press) ease}
+    .primary{display:inline-flex;align-items:center;justify-content:center;color:var(--on-action);background:var(--blue);border:0;border-radius:var(--radius);min-height:48px;padding:var(--s3) var(--s6);font-weight:600;cursor:pointer;transition:background-color var(--motion-press) ease,color var(--motion-press) ease}
+    .primary:disabled{opacity:.45;cursor:not-allowed}
+    .field{display:grid;gap:var(--s2);font-size:var(--small);font-weight:600;min-width:0}
+    .field>span:not(.field-box){display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:var(--s1) var(--s2)}
+    .field-status{font-size:12px;font-weight:400;color:var(--muted);white-space:nowrap}
+    .field input,.field select{width:100%;min-width:0;min-height:48px;color:var(--ink);background:var(--field-surface);border:1px solid var(--field-edge);border-radius:var(--s2);font-size:var(--body);font-weight:400;padding:var(--s3)}
+    .field select{appearance:auto;padding-right:var(--s8)}
+    .field input::placeholder{color:var(--muted);opacity:1}
+    .field input:disabled,.field select:disabled{color:var(--muted);border-color:color-mix(in srgb,var(--field-edge) 55%,transparent);cursor:not-allowed}
+    .field input:focus-visible,.field select:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+    .field small{font-weight:400;font-size:12px}
+    .fields-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
+    .term-fields{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--s3)}
+    .money-app .form{display:grid;gap:var(--s6)}
+    .money-app .form>.primary{justify-self:start}
+    .form-actions{display:flex;align-items:center;gap:var(--s6);flex-wrap:wrap}
+    .error{color:var(--error);margin-top:var(--s4)}
+    .money-app details{max-width:none}
+    .money-app summary{cursor:pointer;font-weight:600;min-height:48px;padding:var(--s3) 0;list-style:none;display:flex;align-items:center;gap:var(--s2);transition:color var(--motion-press) ease}
+    .money-app summary::-webkit-details-marker{display:none}
+    .money-app summary::before{content:"";flex:none;width:14px;height:14px;background:currentColor;-webkit-mask:var(--chevron) center/contain no-repeat;mask:var(--chevron) center/contain no-repeat;transition:transform var(--motion-ui) var(--ease-press)}
+    .money-app details[open]>summary::before{transform:rotate(90deg)}
+    .input-disclosure{padding:var(--s3) 0}
+    .disclosure-content{display:grid;gap:var(--s4);padding:var(--s3) 0}
+    @keyframes disclosure-settle{from{opacity:0}}
+    .money-app details[open]>.disclosure-content{animation:disclosure-settle var(--motion-fade) ease-out}
+    .policy-assist{display:grid;gap:var(--s4);justify-items:start}
+    .policy-assist>.input-disclosure{padding:0}
+    .assist-candidate{display:grid;gap:var(--s2);margin:var(--s2) 0;font-size:var(--body)}
+    .assist-candidate input[type=checkbox]{width:18px;height:18px;margin-right:var(--s2);accent-color:var(--blue)}
+    .assist-actions{display:flex;gap:var(--s6);flex-wrap:wrap;align-items:center}
+    .shared-profile{margin:var(--s8) 0 var(--s12);padding:var(--s6);background:var(--wash);border-radius:var(--radius);display:grid;gap:var(--s6)}
+    .shared-profile h2{font-size:20px}
+    .decision-section{scroll-margin-top:100px;margin-top:64px}
+    .decision-section:focus{outline:none}
+    .section-heading{display:flex;gap:var(--s4);align-items:baseline;margin-bottom:var(--s8)}
+    .section-heading p{color:var(--muted);margin-top:var(--s2)}
+    .section-index{color:var(--blue);font-size:var(--small);font-weight:700}
+    .insurance-fields{display:grid;grid-template-columns:1fr 1fr;gap:var(--s8);margin-top:var(--s6)}
+    .insurance-fields>section,.surplus-form>section{display:grid;align-content:start;gap:var(--s4)}
+    .offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s6);align-items:stretch}
+    .offers-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .offer{position:relative;min-width:0;padding:var(--s6);background:var(--paper);border-radius:var(--radius);display:grid;gap:var(--s4);align-content:start}
+    .offer>.sketch{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+    .offer>.sketch path{fill:none;stroke:var(--blue);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+    .offer-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--s2)}
+    .slider{display:grid;gap:var(--s3);font-size:var(--small);font-weight:600;min-width:0;touch-action:pan-y}
+    .slider>span{display:flex;justify-content:space-between;gap:var(--s3)}
+    .slider strong{color:var(--blue);white-space:nowrap;font-variant-numeric:tabular-nums}
+    .money-app input[type=range]{width:100%;accent-color:var(--blue);min-height:44px;cursor:pointer}
+    .surplus-form{display:grid;grid-template-columns:1.2fr 1fr;gap:var(--s8);background:var(--wash);padding:var(--s6);border-radius:var(--radius)}
+    .assumption-workbench{display:grid;gap:var(--s6);padding:var(--s6);background:var(--wash);border-radius:var(--radius)}
+    .assumption-workbench>.field{max-width:400px}
+    .path-note{font-size:var(--small);color:var(--blue)}
+    .recommendation{margin-top:var(--s8);background:var(--wash);padding:var(--s8);border-radius:var(--radius);display:grid;gap:var(--s6);scroll-margin-top:100px}
+    .recommendation:focus{outline:none}
+    .recommendation:focus-visible{outline:2px solid var(--blue);outline-offset:var(--s2)}
+    .recommendation>h3{font-size:var(--section);line-height:1.3;color:var(--blue);font-weight:650}
+    .recommendation .results-grid h3{font-size:18px;color:var(--ink);margin-bottom:var(--s4)}
+    .results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--s6)}
+    .policy-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--s6)}
+    .fact{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s6);padding:var(--s2) 0;font-size:var(--small)}
+    .fact span:not(.sc-interp){color:var(--muted)}
+    .fact strong{font-size:18px;text-align:right;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+    .verdict-delta{display:flex;gap:var(--s8);flex-wrap:wrap}
+    .verdict-delta strong{display:block;font-size:30px;line-height:1.15;letter-spacing:-.015em;color:var(--blue);font-variant-numeric:tabular-nums}
+    .verdict-delta span:not(.sc-interp){font-size:var(--small);color:var(--muted)}
+    .gap-list{display:grid;gap:var(--s3)}
+    .scenario-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s6)}
+    .scenario-grid h4{margin:0 0 var(--s4);font-size:var(--body)}
+    .scenario-grid .fact{display:grid;gap:var(--s1)}
+    .scenario-grid .fact strong{text-align:left}
+    .workspace-footer{margin-top:var(--s12);padding:var(--s6) 0;color:var(--muted);font-size:12px}
+    .money-visual{display:grid;gap:var(--s4);min-width:0}
+    .money-visual h4{font-size:var(--body);margin:0}
+    .visual-choices{display:flex;flex-wrap:wrap;gap:var(--s2)}
+    .visual-choices button{font:inherit;font-size:var(--small);min-height:48px;padding:var(--s2) var(--s3);border:1px solid var(--field-edge);border-radius:var(--s2);background:var(--field-surface);color:var(--ink);transition:background-color var(--motion-press) ease,color var(--motion-press) ease,border-color var(--motion-press) ease}
+    .visual-choices button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+    .visual-readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--s4)}
+    .visual-readouts>div{display:grid;gap:var(--s1);min-width:0}
+    .visual-readouts strong{overflow-wrap:anywhere}
+    .visual-readouts span:not(.sc-interp){font-size:var(--section);font-variant-numeric:tabular-nums}
+    .hbar-chart{display:grid;gap:var(--s3);padding:var(--s3) 0}
+    .hbar-row{display:grid;grid-template-columns:88px 1fr;align-items:center;gap:var(--s3);font-size:12px;color:var(--muted)}
+    .hbar-track{display:flex;height:40px;width:100%}
+    .hbar-fill{display:block;height:100%;background:var(--blue)}
+    .hbar-hatch{display:block;height:100%;background:repeating-linear-gradient(-41deg,var(--ink) 0 1px,transparent 1px 6px);opacity:.75}
+    .hbar-axis{display:flex;justify-content:space-between;margin-left:100px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:var(--s1)}
+    .line-chart{display:grid;grid-template-columns:48px 1fr;gap:var(--s2);align-items:stretch}
+    .line-chart .y-axis{display:flex;flex-direction:column;justify-content:space-between;font-size:12px;color:var(--muted);text-align:right;height:200px;font-variant-numeric:tabular-nums}
+    .line-chart svg{display:block;width:100%;height:200px;border-left:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .line-chart .x-axis{grid-column:2;display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+    .line-chart polyline,.line-chart line{vector-effect:non-scaling-stroke;fill:none}
+    @media(hover:hover) and (pointer:fine){
+      .primary:hover:not(:disabled){background:var(--ink);color:var(--paper)}
+      .quiet:hover,.theme-toggle:hover,.money-app summary:hover{color:var(--blue)}
+      .app-nav a:hover{color:var(--ink)}
+      .primary,.quiet,.visual-choices button{transition:transform var(--motion-press) var(--ease-press),background-color var(--motion-press) ease,color var(--motion-press) ease,border-color var(--motion-press) ease}
+      .primary:active:not(:disabled),.quiet:active,.visual-choices button:active{transform:scale(var(--press-scale))}
+    }
+    @media(max-width:1000px){.offers-3{grid-template-columns:repeat(2,minmax(0,1fr))}.scenario-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:800px){.money-app{--title:30px}.app-header{padding:var(--s4);gap:var(--s3)}.brand{font-size:20px}.logo{width:48px;height:52.8px}.header-tools .preview-label{display:none}.app-nav{padding:var(--s2) var(--s4);gap:var(--s4);justify-content:space-between}.app-nav a{font-size:12px}.workspace{padding:var(--s6) var(--s4)}.offer-grid,.offers-3,.insurance-fields,.surplus-form{grid-template-columns:1fr}.decision-section{margin-top:var(--s12)}.results-grid{gap:var(--s6)}.fact strong{font-size:var(--body)}.recommendation,.offer,.shared-profile,.surplus-form,.assumption-workbench{padding:var(--s4)}.verdict-delta strong{font-size:26px}}
+    @media(max-width:480px){.money-app{--section:22px}.page-title h1{font-size:var(--section)}.fields-grid,.policy-facts,.scenario-grid{grid-template-columns:1fr}.theme-toggle{min-width:0}.visual-readouts{grid-template-columns:1fr}.hbar-row{grid-template-columns:64px 1fr}.hbar-axis{margin-left:76px}}
+    @media(prefers-reduced-motion:reduce){.money-app *,.money-app *::before,.money-app *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.logo-rail{animation:none!important}}
+  </style>
+</helmet>
+<div class="money-app onepage" id="top" data-theme="{{ theme }}">
+  <header class="app-header">
+    <div class="brand">
+      <svg class="logo" viewBox="40 10 80 88" aria-hidden="true"><defs><linearGradient id="proto-rail" x1="45.89" x2="113.4" y1="-3.793" y2="-3.793" gradientTransform="matrix(1 0 0 -1 0 61.85)" gradientUnits="userSpaceOnUse"><stop stop-color="#A9BFEE" offset=".075"></stop><stop stop-color="#4E79DA" offset=".574"></stop><stop stop-color="#254BBF" offset=".916"></stop></linearGradient></defs><path fill="#CEDDF5" d="m90.5 15.3h-31.9c-2.3 0-4.6 2-4.6 4.4v67.2c0 2.7 1.9 4.8 4.6 4.8h42c2.6 0 4.6-1.9 4.6-4.5v-56.9l-14.7-15z"></path><path fill="#386ADA" d="m89.6 16.6h-30.9c-1.5 0-3.1 1.2-3.1 3.3v66.2c0 2.3 0.9 4.1 3.1 4.2h41.9c1.9 0 3.2-1.3 3.2-3.3v-56.2l-14.2-14.2z"></path><path fill="#CEDDF5" d="m89.6 16.3v11.5c0 1.5 1.3 2.9 2.9 2.9h11.4l-14.3-14.4z"></path><g class="logo-rail"><path fill="url(#proto-rail)" d="m112.2 60.4h-65.1c-0.6 0-1.3 0.5-1.3 1.2v6.6c0 0.8 0.6 1.1 1.2 1.1h65.2c0.6 0 1.2-0.4 1.2-1v-6.8c0-0.6-0.6-1.1-1.2-1.1z"></path><path fill="#F3F6FC" d="m45.9 63.2v3h67.5v-3h-67.5z"></path></g><path fill="#FFFFFF" d="m68.2 22.9h2.6l0.5-1.1h-8.6l-0.5 1.3h1.6c1.7 0 2.8 0.5 3 1.5h-4.2l-0.8 1.6h5.1c-0.2 1.3-1.4 2-3.3 2h-1.2v1.6c1.6 1.9 3.3 3.8 4.8 6.5h2.2c-1.5-2.3-3-4.3-4.7-6.7 2.2 0 4.1-1.2 4.4-3.4h1.8l0.5-1.4h-2.3c-0.1-0.8-0.4-1.4-0.9-1.9z"></path></svg>
+      <a href="#top" onClick="{{ nav.goTop }}">Money Ops</a>
+    </div>
+    <div class="header-tools">
+      <span class="preview-label">Editable sample numbers</span>
+      <button type="button" class="theme-toggle" role="switch" aria-checked="{{ isDark }}" aria-label="Dark mode" onClick="{{ toggleTheme }}">
+        <span aria-hidden="true">{{ themeLabel }}</span>
+        <span class="theme-switch-track" aria-hidden="true"><span></span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="app-nav" aria-label="Money decisions">
+    <a href="#insurance" data-label="Understand term life" aria-current="{{ nav.insurance }}" onClick="{{ nav.goInsurance }}">Understand term life</a>
+    <a href="#compare" data-label="Compare loans" aria-current="{{ nav.compare }}" onClick="{{ nav.goCompare }}">Compare loans</a>
+    <a href="#surplus" data-label="Prepay or invest" aria-current="{{ nav.surplus }}" onClick="{{ nav.goSurplus }}">Prepay or invest</a>
+  </nav>
+  <main class="workspace">
+    <div class="page-title">
+      <h1>Make sense of your policy.</h1>
+      <p class="muted">Upload a term-life policy or enter the essentials.</p>
+    </div>
+
+    <section id="insurance" tabindex="-1" class="decision-section">
+      <div class="section-heading"><span class="section-index">01</span><div><h2>Your policy</h2></div></div>
+      <div class="policy-assist">
+        <label class="primary policy-upload" for="pdf-input" tabindex="0">Upload policy PDF</label>
+        <input id="pdf-input" type="file" accept="application/pdf,.pdf" aria-label="Upload term-life PDF" hidden="{{ true }}" onChange="{{ assist.choose }}">
+        <p class="small">Text PDF, up to 5 MB. Stays in this browser</p>
+        <details class="input-disclosure"><summary>File support &amp; privacy</summary><div class="disclosure-content"><p>Scanned PDFs need manual entry. Nothing is applied until you confirm each value against its source. Reading a policy does not verify active cover.</p><p class="small">Prototype note: this canvas cannot run the app's local PDF reader, so any chosen file shows passages from the labelled sample policy instead of your document.</p></div></details>
+        <button type="button" class="quiet" onClick="{{ assist.sample }}">Use the sample policy</button>
+        <sc-if value="{{ assist.busy }}" hint-placeholder-val="{{ false }}"><p role="status">Reading the PDF on your device…</p></sc-if>
+        <sc-if value="{{ assist.hasMessage }}" hint-placeholder-val="{{ false }}"><p role="status">{{ assist.message }}</p></sc-if>
+        <sc-for list="{{ assist.found }}" as="item" hint-placeholder-count="0">
+          <label class="assist-candidate"><span><input type="checkbox" checked="{{ item.checked }}" onChange="{{ item.toggle }}"> Use {{ item.label }}: <strong>{{ item.value }}</strong></span><small>Source: {{ item.source }}</small></label>
+        </sc-for>
+        <sc-if value="{{ assist.hasFound }}" hint-placeholder-val="{{ false }}">
+          <div class="assist-actions">
+            <button type="button" class="primary" disabled="{{ assist.applyDisabled }}" onClick="{{ assist.apply }}">Apply confirmed values</button>
+            <button type="button" class="quiet" onClick="{{ assist.clear }}">Clear PDF assist</button>
+          </div>
+        </sc-if>
+      </div>
+      <details class="input-disclosure" id="policy-details">
+        <summary>Policy details</summary>
+        <div class="disclosure-content">
+          <div class="form">
+            <div class="insurance-fields">
+              <section>
+                <h3>The cover you hold</h3>
+                <label class="field"><span>Policy type<small class="field-status">Locked</small></span><select disabled="{{ true }}" value="Term life" onChange="{{ on.noop }}"><option value="Term life">Term life</option></select></label>
+                <label class="field"><span>Sum assured (₹)<small class="field-status">Required</small></span><input type="number" min="1" step="any" required="{{ true }}" value="{{ policy.cover }}" onChange="{{ on.policy.cover }}"></label>
+                <div class="term-fields">
+                  <label class="field"><span>Premium amount (₹)<small class="field-status">Required</small></span><input type="number" min="1" step="any" required="{{ true }}" value="{{ policy.premium }}" onChange="{{ on.policy.premium }}"></label>
+                  <label class="field"><span>Frequency<small class="field-status">Required</small></span><select value="{{ policy.frequency }}" onChange="{{ on.policy.frequency }}"><option value="annual">annual</option><option value="monthly">monthly</option></select></label>
+                </div>
+                <div class="fields-grid">
+                  <label class="field"><span>Policy term (years)<small class="field-status">Required</small></span><input type="number" min="1" max="80" step="1" required="{{ true }}" value="{{ policy.term }}" onChange="{{ on.policy.term }}"></label>
+                  <label class="field"><span>Policyholder age<small class="field-status">Required</small></span><input type="number" min="18" max="100" step="1" required="{{ true }}" value="{{ policy.age }}" onChange="{{ on.policy.age }}"></label>
+                </div>
+              </section>
+              <section>
+                <h3>Policy details</h3>
+                <label class="field"><span>Premium payment term (years)<small class="field-status">Optional</small></span><input type="number" min="1" max="80" step="1" value="{{ policy.paymentTerm }}" onChange="{{ on.policy.paymentTerm }}"></label>
+                <label class="field"><span>Insurer<small class="field-status">Optional</small></span><input type="text" value="{{ policy.insurer }}" onChange="{{ on.policy.insurer }}"></label>
+                <label class="field"><span>Nominee<small class="field-status">Optional</small></span><input type="text" value="{{ policy.nominee }}" onChange="{{ on.policy.nominee }}"></label>
+                <label class="field"><span>Riders / add-ons<small class="field-status">Optional</small></span><input type="text" value="{{ policy.riders }}" onChange="{{ on.policy.riders }}"></label>
+                <label class="field"><span>Waiting periods / exclusions<small class="field-status">Optional</small></span><input type="text" value="{{ policy.exclusions }}" onChange="{{ on.policy.exclusions }}"></label>
+                <label class="field"><span>Next premium due date<small class="field-status">Optional</small></span><input type="date" value="{{ policy.renewalDate }}" onChange="{{ on.policy.renewalDate }}"><small>Shows an on-page due-date flag. No reminder is scheduled.</small></label>
+              </section>
+            </div>
+            <button type="button" class="primary" onClick="{{ on.review }}">Review my term-life cover</button>
+          </div>
+        </div>
+      </details>
+      <sc-if value="{{ policyResult.hasError }}" hint-placeholder-val="{{ false }}"><p class="error" role="alert">{{ policyResult.error }}</p></sc-if>
+      <sc-if value="{{ policyResult.show }}" hint-placeholder-val="{{ false }}">
+        <section id="policy-result" tabindex="-1" class="recommendation" aria-live="polite">
+          <h3>{{ policyResult.head }}</h3>
+          <p>From your entries. Confirm active cover with your insurer.</p>
+          <div class="policy-facts">
+            <div class="fact"><span>Cover</span><strong>{{ policyResult.cover }}</strong></div>
+            <div class="fact"><span>Premium</span><strong>{{ policyResult.premium }}</strong></div>
+            <div class="fact"><span>Policy term</span><strong>{{ policyResult.term }}</strong></div>
+            <div class="fact"><span>Premium payment term</span><strong>{{ policyResult.paymentTerm }}</strong></div>
+            <div class="fact"><span>Next premium due</span><strong>{{ policyResult.due }}</strong></div>
+          </div>
+          <sc-if value="{{ policyResult.hasIncome }}" hint-placeholder-val="{{ false }}">
+            <div class="verdict-delta">
+              <div><strong>{{ policyResult.gap }}</strong><span>Potential coverage gap</span></div>
+              <div><strong>{{ policyResult.target }}</strong><span>Illustrative cover target</span></div>
+            </div>
+            <p class="small">Why: {{ policy.incomeMultiple }} × annual income + existing liabilities. This target excludes assets and inflation.</p>
+          </sc-if>
+          <sc-if value="{{ policyResult.noIncome }}" hint-placeholder-val="{{ false }}">
+            <p class="small"><a href="#profile-title" onClick="{{ nav.goProfile }}">Add income in Your details</a> to check adequacy.</p>
+          </sc-if>
+          <details class="input-disclosure"><summary>Assumptions and checks</summary><div class="disclosure-content">
+            <label class="slider"><span>Income multiple · rule of thumb<strong>{{ policy.incomeMultiple }}×</strong></span><input type="range" min="10" max="15" step="1" value="{{ policy.incomeMultiple }}" onChange="{{ on.policy.incomeMultiple }}"></label>
+            <div class="gap-list">
+              <p>{{ policyResult.dependentsNote }}</p>
+              <p>Age {{ policy.age }} with a {{ policy.term }}-year term ends around age {{ policyResult.endAge }}.</p>
+              <p>{{ policyResult.nomineeNote }}</p>
+              <p>{{ policyResult.exclusionsNote }}</p>
+              <p>{{ policyResult.ridersNote }}</p>
+              <p>{{ policyResult.dueNote }}</p>
+            </div>
+            <sc-if value="{{ policyResult.paymentTermTooLong }}" hint-placeholder-val="{{ false }}"><p class="error">Check the payment term: it is longer than the policy term you entered.</p></sc-if>
+            <p class="small">No insurer or product recommendation. Check the wording and insurer.</p>
+          </div></details>
+        </section>
+      </sc-if>
+    </section>
+
+    <section class="shared-profile" aria-labelledby="profile-title">
+      <div><h2 id="profile-title">Your details</h2></div>
+      <details class="input-disclosure"><summary>Income, tax and buffer</summary><div class="disclosure-content">
+        <div class="fields-grid">
+          <label class="field"><span>Tax slab (%)<small class="field-status">Default · editable</small></span><input type="number" min="0" max="50" step="any" value="{{ profile.taxSlab }}" onChange="{{ on.profile.taxSlab }}"><small>20% example. Investment tax can differ.</small></label>
+          <label class="field"><span>Monthly essential expenses (₹)<small class="field-status">Optional</small></span><input type="number" min="0" step="any" value="{{ profile.monthlyExpenses }}" onChange="{{ on.profile.monthlyExpenses }}"><small>Used when no buffer amount is entered.</small></label>
+          <label class="field"><span>Annual income (₹)<small class="field-status">Optional</small></span><input type="number" min="0" step="any" value="{{ profile.income }}" onChange="{{ on.profile.income }}"></label>
+          <label class="field"><span>Number of dependents<small class="field-status">Optional</small></span><input type="number" min="0" step="1" value="{{ profile.dependents }}" onChange="{{ on.profile.dependents }}"></label>
+          <label class="field"><span>Existing liabilities (₹)<small class="field-status">Optional</small></span><input type="number" min="0" step="any" value="{{ profile.liabilities }}" onChange="{{ on.profile.liabilities }}"></label>
+        </div>
+      </div></details>
+    </section>
+
+    <section id="compare" tabindex="-1" class="decision-section">
+      <div class="section-heading"><span class="section-index">02</span><div><h2>True cost comparison</h2><p>Compare rates, fees and financing.</p></div></div>
+      <details class="input-disclosure"><summary>Edit loan offers and compare</summary><div class="disclosure-content">
+        <div class="form">
+          <div class="offer-grid offers-{{ offerCount }}">
+            <sc-for list="{{ offers }}" as="offer" hint-placeholder-count="2">
+              <div class="offer">
+                <svg class="sketch" viewBox="0 0 100 200" preserveAspectRatio="none" aria-hidden="true"><path d="{{ offer.sketch }}"></path></svg>
+                <div class="offer-heading"><h3>{{ offer.heading }}</h3><sc-if value="{{ offer.removable }}" hint-placeholder-val="{{ false }}"><button type="button" class="quiet" onClick="{{ offer.remove }}">Remove</button></sc-if></div>
+                <label class="field"><span>Offer name<small class="field-status">Required</small></span><input type="text" required="{{ true }}" value="{{ offer.name }}" onChange="{{ offer.set.name }}"></label>
+                <label class="field"><span>Loan type<small class="field-status">Required</small></span><select value="{{ offer.loanType }}" onChange="{{ offer.set.loanType }}"><option value="Personal loan">Personal loan</option><option value="Home loan">Home loan</option><option value="Auto loan">Auto loan</option><option value="Gold loan">Gold loan</option><option value="Business loan">Business loan</option></select></label>
+                <label class="field"><span>Sanctioned principal (₹)<small class="field-status">Required</small></span><input type="number" min="1" step="any" required="{{ true }}" value="{{ offer.amount }}" onChange="{{ offer.set.amount }}"></label>
+                <label class="field"><span>Interest (% p.a.)<small class="field-status">Required</small></span><input type="number" min="0" step="any" required="{{ true }}" value="{{ offer.annualRate }}" onChange="{{ offer.set.annualRate }}"></label>
+                <label class="field"><span>Rate calculation<small class="field-status">{{ offer.rateStatus }}</small></span><select disabled="{{ offer.isHome }}" value="{{ offer.rateShown }}" onChange="{{ offer.set.rateType }}"><option value="reducing">Reducing balance</option><option value="flat">Flat rate</option></select><small>{{ offer.rateHint }}</small></label>
+                <div class="term-fields">
+                  <label class="field"><span>Tenure<small class="field-status">Required</small></span><input type="number" min="1" step="1" required="{{ true }}" value="{{ offer.tenure }}" onChange="{{ offer.set.tenure }}"></label>
+                  <label class="field"><span>Unit<small class="field-status">Default · editable</small></span><select value="{{ offer.tenureUnit }}" onChange="{{ offer.set.tenureUnit }}"><option value="months">months</option><option value="years">years</option></select></label>
+                </div>
+                <div class="term-fields">
+                  <label class="field"><span>Processing fee<small class="field-status">Required</small></span><input type="number" min="0" step="any" required="{{ true }}" value="{{ offer.processingFee }}" onChange="{{ offer.set.processingFee }}"></label>
+                  <label class="field"><span>Fee basis<small class="field-status">Default · editable</small></span><select value="{{ offer.processingFeeType }}" onChange="{{ offer.set.processingFeeType }}"><option value="percent">Percent (%)</option><option value="flat">Amount (₹)</option></select></label>
+                </div>
+                <label class="slider"><span>GST applied to processing fee<strong>{{ offer.gstRate }}%</strong></span><input type="range" min="0" max="28" step="1" value="{{ offer.gstRate }}" onChange="{{ offer.set.gstRate }}"></label>
+                <details class="input-disclosure"><summary>Extra fees</summary><div class="disclosure-content">
+                  <label class="field"><span>Loan-protection premium (₹)<small class="field-status">Optional</small></span><input type="number" min="0" step="any" value="{{ offer.insurance }}" onChange="{{ offer.set.insurance }}"></label>
+                  <sc-if value="{{ offer.hasInsurance }}" hint-placeholder-val="{{ false }}">
+                    <label class="field"><span>Premium payment<small class="field-status">Default · editable</small></span><select value="{{ offer.insuranceMode }}" onChange="{{ offer.set.insuranceMode }}"><option value="upfront">Pay upfront</option><option value="financed">Add to loan · accrues interest</option></select></label>
+                  </sc-if>
+                  <label class="field"><span>Other fees incl. taxes (₹)<small class="field-status">Optional</small></span><input type="number" min="0" step="any" value="{{ offer.otherFees }}" onChange="{{ offer.set.otherFees }}"><small>Legal, valuation, stamp duty and MODT combined.</small></label>
+                </div></details>
+              </div>
+            </sc-for>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="primary" onClick="{{ on.compare }}">Compare true costs</button>
+            <sc-if value="{{ canAddOffer }}" hint-placeholder-val="{{ true }}"><button type="button" class="quiet" onClick="{{ on.addOffer }}">+ Add third offer</button></sc-if>
+          </div>
+          <p class="small">Full-tenure comparison. Planned prepayment is deferred to a later version.</p>
+        </div>
+      </div></details>
+      <sc-if value="{{ loan.hasError }}" hint-placeholder-val="{{ false }}"><p class="error" role="alert">{{ loan.error }}</p></sc-if>
+      <sc-if value="{{ loan.show }}" hint-placeholder-val="{{ false }}">
+        <section id="loan-result" tabindex="-1" class="recommendation" aria-live="polite">
+          <h3>{{ loan.head }}</h3>
+          <p>{{ loan.sub }}</p>
+          <sc-if value="{{ loan.hasWinner }}" hint-placeholder-val="{{ false }}">
+            <div class="verdict-delta">
+              <div><strong>{{ loan.delta1 }}</strong><span>{{ loan.delta1Label }}</span></div>
+              <div><strong>{{ loan.delta2 }}</strong><span>{{ loan.delta2Label }}</span></div>
+            </div>
+          </sc-if>
+          <details class="input-disclosure"><summary>View offer detail, assumptions and charts</summary><div class="disclosure-content">
+            <div class="results-grid">
+              <sc-for list="{{ loan.offers }}" as="o" hint-placeholder-count="2">
+                <div>
+                  <h3>{{ o.name }}</h3>
+                  <div class="fact"><span>Monthly EMI</span><strong>{{ o.emi }}</strong></div>
+                  <div class="fact"><span>Total interest</span><strong>{{ o.interest }}</strong></div>
+                  <div class="fact"><span>Net disbursal</span><strong>{{ o.netDisbursal }}</strong></div>
+                  <div class="fact"><span>Total borrowing cost</span><strong>{{ o.cost }}</strong></div>
+                  <div class="fact"><span>Effective APR · XIRR</span><strong>{{ o.apr }}</strong></div>
+                  <div class="fact"><span>Cost per lakh</span><strong>{{ o.costPerLakh }}</strong></div>
+                  <div class="fact"><span>Full term</span><strong>{{ o.term }}</strong></div>
+                  <sc-if value="{{ o.isFlat }}" hint-placeholder-val="{{ false }}"><div class="fact"><span>Equivalent reducing rate</span><strong>{{ o.equivalent }}</strong></div></sc-if>
+                </div>
+              </sc-for>
+            </div>
+            <details class="input-disclosure"><summary>See how fees change the comparison</summary><div class="disclosure-content">
+              <div class="money-visual">
+                <h4>From interest to the full borrowing cost</h4>
+                <p class="small">Principal is excluded. Bar lengths share one scale; each offer covers its own full term.</p>
+                <div class="visual-choices" role="group" aria-label="Loan cost layers"><button type="button" aria-pressed="{{ cost.isInterest }}" onClick="{{ cost.pickInterest }}">Interest only</button><button type="button" aria-pressed="{{ cost.isAll }}" onClick="{{ cost.pickAll }}">Include all fees</button></div>
+                <div class="hbar-chart" role="img" aria-label="Interest and fees by offer. Exact amounts are listed below.">
+                  <sc-for list="{{ cost.bars }}" as="bar" hint-placeholder-count="2">
+                    <div class="hbar-row"><span>{{ bar.name }}</span><span class="hbar-track"><span class="hbar-fill" style="width: {{ bar.interestPct }}%"></span><span class="hbar-hatch" style="width: {{ bar.feesPct }}%"></span></span></div>
+                  </sc-for>
+                  <div class="hbar-axis"><sc-for list="{{ cost.ticks }}" as="t" hint-placeholder-count="5"><span>{{ t }}</span></sc-for></div>
+                </div>
+                <p class="small">Blue: interest. Hatched: fees, GST and insurance.</p>
+                <div class="visual-readouts">
+                  <sc-for list="{{ cost.bars }}" as="bar" hint-placeholder-count="2">
+                    <div><strong>{{ bar.name }}</strong><span>{{ bar.total }}</span><small>{{ bar.detail }}</small><small>{{ bar.meta }}</small></div>
+                  </sc-for>
+                </div>
+                <p class="small">{{ cost.note }}</p>
+              </div>
+            </div></details>
+            <details class="input-disclosure"><summary>Understand flat versus reducing interest</summary><div class="disclosure-content">
+              <div class="money-visual">
+                <h4>Same quoted rate, different interest bills</h4>
+                <p class="small">Using {{ rate.name }}: {{ rate.amount }}, {{ rate.rate }}% p.a., {{ rate.months }} months. This teaching comparison excludes fees and insurance and does not change your offer’s rate type.</p>
+                <div class="line-chart" role="img" aria-label="Monthly interest: flat interest stays constant, reducing interest falls with the outstanding balance. Exact amounts follow the month slider.">
+                  <div class="y-axis"><span>{{ rate.y0 }}</span><span>{{ rate.y1 }}</span><span>{{ rate.y2 }}</span><span>0</span></div>
+                  <svg viewBox="0 0 600 200" preserveAspectRatio="none"><polyline points="{{ rate.flatPts }}" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="5 4"></polyline><polyline points="{{ rate.reducingPts }}" stroke="var(--blue)" stroke-width="3"></polyline><line x1="{{ rate.mx }}" x2="{{ rate.mx }}" y1="0" y2="200" stroke="var(--muted)" stroke-width="1"></line></svg>
+                  <div class="x-axis"><span>1</span><span>{{ rate.xMid }}</span><span>{{ rate.months }}</span></div>
+                </div>
+                <label class="slider"><span>Inspect interest month<strong>{{ rate.month }}</strong></span><input type="range" min="1" max="{{ rate.months }}" step="1" value="{{ rate.month }}" onChange="{{ on.rateMonth }}"></label>
+                <div class="visual-readouts">
+                  <div><strong>Flat · original principal</strong><span>{{ rate.flatNow }}</span><small>Interest in month {{ rate.month }}</small><small>Full-term interest {{ rate.flatTotal }}</small><small>EMI {{ rate.flatEmi }}</small></div>
+                  <div><strong>Reducing · unpaid balance</strong><span>{{ rate.reducingNow }}</span><small>Interest in month {{ rate.month }}</small><small>Full-term interest {{ rate.reducingTotal }}</small><small>EMI {{ rate.reducingEmi }}</small></div>
+                </div>
+                <p class="small">The same percentage is applied to different balances. Compare effective APR, rather than treating a flat quote as equivalent to a reducing quote.</p>
+              </div>
+            </div></details>
+            <p class="small">Assumptions: monthly payments from today, full tenure and unchanged rates. GST applies only to processing fees; other fees are entered inclusive of tax.</p>
+          </div></details>
+        </section>
+      </sc-if>
+    </section>
+
+    <section id="surplus" tabindex="-1" class="decision-section">
+      <div class="section-heading"><span class="section-index">03</span><div><h2>Have surplus funds?</h2><p>Keep a buffer, then compare your options.</p></div></div>
+      <details class="input-disclosure"><summary>Surplus details</summary><div class="disclosure-content">
+        <div class="form">
+          <div class="surplus-form">
+            <section>
+              <h3>Your loan today</h3>
+              <label class="field"><span>Loan type<small class="field-status">Required</small></span><select value="{{ surplus.loanType }}" onChange="{{ on.surplus.loanType }}"><option value="Personal loan">Personal loan</option><option value="Home loan">Home loan</option><option value="Auto loan">Auto loan</option><option value="Gold loan">Gold loan</option><option value="Business loan">Business loan</option></select></label>
+              <div class="fields-grid">
+                <label class="field"><span>Outstanding balance (₹)<small class="field-status">Required</small></span><input type="number" min="1" step="any" required="{{ true }}" value="{{ surplus.balance }}" onChange="{{ on.surplus.balance }}"></label>
+                <label class="field"><span>Interest (% p.a.)<small class="field-status">Required</small></span><input type="number" min="0" step="any" required="{{ true }}" value="{{ surplus.annualRate }}" onChange="{{ on.surplus.annualRate }}"></label>
+              </div>
+              <label class="field"><span>Rate calculation<small class="field-status">{{ surplusView.rateStatus }}</small></span><select disabled="{{ surplusView.isHome }}" value="{{ surplusView.rateShown }}" onChange="{{ on.surplus.rateType }}"><option value="reducing">Reducing balance</option><option value="flat">Flat rate</option></select><small>{{ surplusView.rateHint }}</small></label>
+              <sc-if value="{{ surplusView.isFlat }}" hint-placeholder-val="{{ false }}"><p class="small">Flat conversion assumes the remaining amount and tenure describe the remaining flat payment schedule. Check these against your lender statement.</p></sc-if>
+              <label class="field"><span>Rate arrangement<small class="field-status">Default · editable</small></span><select value="{{ surplus.rateNature }}" onChange="{{ on.surplus.rateNature }}"><option value="fixed">fixed</option><option value="floating">floating</option></select></label>
+              <div class="term-fields">
+                <label class="field"><span>Remaining tenure<small class="field-status">Required</small></span><input type="number" min="1" step="1" required="{{ true }}" value="{{ surplus.tenure }}" onChange="{{ on.surplus.tenure }}"></label>
+                <label class="field"><span>Unit<small class="field-status">Default · editable</small></span><select value="{{ surplus.tenureUnit }}" onChange="{{ on.surplus.tenureUnit }}"><option value="months">months</option><option value="years">years</option></select></label>
+              </div>
+              <label class="field"><span>Current EMI (₹)<small class="field-status">Optional</small></span><input type="number" min="0" step="any" value="{{ surplus.currentEmi }}" onChange="{{ on.surplus.currentEmi }}"><small>If supplied, we check it against the loan details.</small></label>
+            </section>
+            <section>
+              <h3>Your deployment</h3>
+              <label class="field"><span>Surplus amount (₹)<small class="field-status">Required</small></span><input type="number" min="1" step="any" required="{{ true }}" value="{{ surplus.surplus }}" onChange="{{ on.surplus.surplus }}"></label>
+              <p class="path-note">{{ surplusView.pathNote }}</p>
+              <sc-if value="{{ surplusView.partPayment }}" hint-placeholder-val="{{ true }}">
+                <label class="field"><span>Prepayment goal<small class="field-status">Default · editable</small></span><select value="{{ surplus.mode }}" onChange="{{ on.surplus.mode }}"><option value="tenure">Reduce tenure · keep EMI</option><option value="emi">Reduce EMI · keep tenure</option></select></label>
+              </sc-if>
+              <div class="term-fields">
+                <label class="field"><span>{{ surplusView.feeLabel }}<small class="field-status">Required</small></span><input type="number" min="0" step="any" required="{{ true }}" value="{{ surplus.prepaymentFee }}" onChange="{{ on.surplus.prepaymentFee }}"></label>
+                <label class="field"><span>Fee basis<small class="field-status">Default · editable</small></span><select value="{{ surplus.feeType }}" onChange="{{ on.surplus.feeType }}"><option value="percent">Percent (%)</option><option value="flat">Amount (₹)</option></select></label>
+              </div>
+              <sc-if value="{{ surplusView.floatingHome }}" hint-placeholder-val="{{ false }}"><p class="small">Floating-rate home-loan prepayment fee defaults to nil for eligible individual non-business loans. Confirm the lender’s terms.</p></sc-if>
+              <label class="field"><span>Other fees (₹)<small class="field-status">Optional</small></span><input type="number" min="0" step="any" value="{{ surplus.otherFees }}" onChange="{{ on.surplus.otherFees }}"></label>
+              <label class="field"><span>Emergency buffer to retain (₹)<small class="field-status">Optional</small></span><input type="number" min="0" step="any" value="{{ surplus.emergencyBuffer }}" onChange="{{ on.surplus.emergencyBuffer }}"><small>Blank uses essential expenses × buffer months. Without either, liquidity is unverified.</small></label>
+              <label class="slider"><span>Buffer months when estimated<strong>{{ surplus.bufferMonths }} months</strong></span><input type="range" min="3" max="6" step="1" value="{{ surplus.bufferMonths }}" onChange="{{ on.surplus.bufferMonths }}"></label>
+            </section>
+          </div>
+          <div class="assumption-workbench">
+            <h3>Investment inputs</h3>
+            <label class="field"><span>Illustrative return preset<small class="field-status">Default · editable</small></span><select value="{{ surplus.investmentPreset }}" onChange="{{ on.preset }}"><option value="fd">FD · 7% example</option><option value="debt">Debt · 8% example</option><option value="equity">Equity · 11% example</option></select></label>
+            <label class="slider"><span>Expected annual return before tax<strong>{{ surplus.investmentRate }}%</strong></span><input type="range" min="-10" max="25" step="0.5" value="{{ surplus.investmentRate }}" onChange="{{ on.surplus.investmentRate }}"></label>
+            <p class="small">Illustrative only. Tax uses your editable slab; equity and debt-fund rules can differ.</p>
+            <details class="input-disclosure"><summary>Loan tax benefit</summary><div class="disclosure-content">
+              <label class="slider"><span>Confirmed annual loan-interest tax saving<strong>{{ surplus.annualLoanTaxBenefit }} ₹</strong></span><input type="range" min="0" max="100000" step="1000" value="{{ surplus.annualLoanTaxBenefit }}" onChange="{{ on.surplus.annualLoanTaxBenefit }}"></label>
+              <p class="small">Default ₹0. Enter a benefit only if you have confirmed eligibility under section 24(b) or 80C.</p>
+            </div></details>
+          </div>
+          <button type="button" class="primary" onClick="{{ on.assess }}">Compare all four scenarios</button>
+        </div>
+      </div></details>
+      <sc-if value="{{ sr.hasError }}" hint-placeholder-val="{{ false }}"><p class="error" role="alert">{{ sr.error }}</p></sc-if>
+      <sc-if value="{{ sr.show }}" hint-placeholder-val="{{ false }}">
+        <section id="surplus-result" tabindex="-1" class="recommendation" aria-live="polite">
+          <h3>{{ sr.head }}</h3>
+          <p>Why: {{ sr.reason }}</p>
+          <div class="verdict-delta">
+            <div><strong>{{ sr.advantage }}</strong><span>{{ sr.advantageLabel }}</span></div>
+            <div><strong>{{ sr.rateGap }} pp</strong><span>Post-tax return / loan-cost difference</span></div>
+          </div>
+          <p class="small">{{ sr.reserveNote }} Deployable in this illustration: {{ sr.available }}. {{ sr.emiNote }}</p>
+          <p class="small">Investments can underperform or lose value. The projected wealth figure applies only after the buffer and input checks above are satisfied.</p>
+          <details class="input-disclosure"><summary>View four scenarios, assumptions and chart</summary><div class="disclosure-content">
+            <div class="scenario-grid">
+              <div><h4>No prepayment</h4><div class="fact"><span>Total payable to loan end</span><strong>{{ sr.baseTotal }}</strong></div><div class="fact"><span>Monthly EMI</span><strong>{{ sr.emi }}</strong></div><div class="fact"><span>Months left</span><strong>{{ sr.baseMonths }}</strong></div></div>
+              <div><h4>{{ sr.shorterHead }}</h4><div class="fact"><span>Total incl. prepay &amp; fees</span><strong>{{ sr.shorterTotal }}</strong></div><div class="fact"><span>Net loan saving</span><strong>{{ sr.shorterSaving }}</strong></div><div class="fact"><span>Months saved</span><strong>{{ sr.monthsSaved }}</strong></div></div>
+              <div><h4>{{ sr.lowerHead }}</h4><div class="fact"><span>New EMI</span><strong>{{ sr.lowerEmi }}</strong></div><div class="fact"><span>Monthly cash freed</span><strong>{{ sr.monthlyFreed }}</strong></div><div class="fact"><span>Net loan saving</span><strong>{{ sr.lowerSaving }}</strong></div></div>
+              <div><h4>Invest instead</h4><div class="fact"><span>Projected post-tax end wealth</span><strong>{{ sr.futureValue }}</strong></div><div class="fact"><span>Same horizon</span><strong>{{ sr.baseMonths }} months</strong></div><div class="fact"><span>Prepay then invest freed EMI</span><strong>{{ sr.prepayFutureValue }}</strong></div></div>
+            </div>
+            <details class="input-disclosure"><summary>See what prepayment changes</summary><div class="disclosure-content">
+              <div class="money-visual">
+                <h4>A smaller balance, then a different finish</h4>
+                <p class="small">{{ prepay.intro }}</p>
+                <div class="visual-choices" role="group" aria-label="Repayment chart mode"><button type="button" aria-pressed="{{ prepay.isShorter }}" onClick="{{ prepay.pickShorter }}">Keep EMI · finish earlier</button><button type="button" aria-pressed="{{ prepay.isLower }}" onClick="{{ prepay.pickLower }}">Lower EMI · keep term</button></div>
+                <div class="line-chart" role="img" aria-label="Outstanding balance by month for no prepayment and the selected prepayment scenario. Use the month slider for exact amounts.">
+                  <div class="y-axis"><span>{{ prepay.y0 }}</span><span>{{ prepay.y1 }}</span><span>{{ prepay.y2 }}</span><span>0</span></div>
+                  <svg viewBox="0 0 600 200" preserveAspectRatio="none"><polyline points="{{ prepay.basePts }}" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="5 4"></polyline><polyline points="{{ prepay.prepayPts }}" stroke="var(--blue)" stroke-width="3"></polyline><line x1="{{ prepay.mx }}" x2="{{ prepay.mx }}" y1="0" y2="200" stroke="var(--ink)" stroke-width="1"></line></svg>
+                  <div class="x-axis"><span>0</span><span>{{ prepay.xMid }} months</span><span>{{ prepay.months }}</span></div>
+                </div>
+                <label class="slider"><span>Inspect repayment month<strong>{{ prepay.month }}</strong></span><input type="range" min="0" max="{{ prepay.months }}" step="1" value="{{ prepay.month }}" onChange="{{ on.prepayMonth }}"></label>
+                <div class="visual-readouts">
+                  <div><strong>No prepayment · dashed</strong><span>{{ prepay.baseNow }}</span><small>Remaining at month {{ prepay.month }}</small></div>
+                  <div><strong>With prepayment · blue</strong><span>{{ prepay.prepayNow }}</span><small>Remaining at month {{ prepay.month }}</small></div>
+                </div>
+                <p class="small">Modeled payoff: {{ prepay.payoffMonths }} months, versus {{ prepay.months }} without prepayment. This toggle explores repayment only; it does not change the recommendation. To change your decision scenario, edit the prepayment goal above and compare again. The liquidity checks still apply.</p>
+              </div>
+            </div></details>
+            <p class="small">End wealth compares equal starting cash and monthly budgets, reinvesting freed payments. The crossover band is ±1 percentage point, not a promise of equivalent outcomes. Tax treatment is simplified; no benefit is inferred from your slab or loan type alone.</p>
+          </div></details>
+        </section>
+      </sc-if>
+    </section>
+
+    <footer class="workspace-footer">
+      <p>Coming later: credit cards, mutual funds and a financial dashboard.</p>
+      <p>Money Ops prototype · Your entries stay in this browser session.</p>
+    </footer>
+  </main>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light","section":"Appearance"},"$preview":{"width":1440,"height":900}}'>
+// ---- formatting ----
+const money = (n) => '₹' + Math.round(n || 0).toLocaleString('en-IN');
+const pct = (n) => (Number(n) || 0).toFixed(2) + '%';
+const short = (n) => n >= 100000 ? (n / 100000).toFixed(1) + 'L' : n >= 1000 ? Math.round(n / 1000) + 'k' : String(Math.round(n));
+
+// ---- loanMath (ported verbatim from mockups/finance-native/loanMath.js) ----
+const EPSILON = 1e-7;
+function monthlyPayment(principal, monthlyRate, months) {
+  if (principal <= 0) return 0;
+  if (monthlyRate === 0) return principal / months;
+  return principal * monthlyRate / -Math.expm1(-months * Math.log1p(monthlyRate));
+}
+function amortize(principal, monthlyRate, payment, maxMonths) {
+  let balance = principal, interest = 0, paidMonths = 0;
+  const balances = [principal], cap = Math.max(maxMonths + 2, 2), tolerance = Math.max(EPSILON, principal * 1e-11);
+  while (balance > tolerance && paidMonths < cap) {
+    const monthInterest = balance * monthlyRate, due = balance + monthInterest, actualPayment = Math.min(payment, due);
+    interest += monthInterest; balance = due - actualPayment;
+    if (balance <= tolerance) balance = 0;
+    balances.push(balance); paidMonths += 1;
+  }
+  if (balance > EPSILON) throw new Error('Loan did not amortize within the expected term.');
+  return { interest, months: paidMonths, balances };
+}
+function compareLoan({ balance, annualRate, months, prepayment }) {
+  const principal = Number(balance), rate = Number(annualRate), term = Number(months), partPayment = Number(prepayment);
+  if (![principal, rate, term, partPayment].every(Number.isFinite)) throw new TypeError('Loan inputs must be finite numbers.');
+  const monthlyRate = rate / 1200, emi = monthlyPayment(principal, monthlyRate, term);
+  const baseline = amortize(principal, monthlyRate, emi, term), reducedPrincipal = Math.max(0, principal - partPayment);
+  const shorter = amortize(reducedPrincipal, monthlyRate, emi, term), lowerEmi = monthlyPayment(reducedPrincipal, monthlyRate, term);
+  const lower = amortize(reducedPrincipal, monthlyRate, lowerEmi, term);
+  return { emi, baseline, shorter, lower: { emi: lowerEmi, ...lower }, savings: baseline.interest - shorter.interest, monthlyRelief: emi - lowerEmi };
+}
+
+// ---- mvpMath (ported verbatim from mockups/finance-native/mvpMath.cjs) ----
+function number(value, label, min = 0, max = Infinity) { const n = Number(value); if (value === '' || value == null || !Number.isFinite(n) || n < min || n > max) throw new Error(label + ' must be between ' + min + ' and ' + (max === Infinity ? 'a valid maximum' : max) + '.'); return n; }
+function term(value) { const n = number(value, 'Tenure', 1, 600); if (!Number.isInteger(n)) throw new Error('Tenure must be a whole number of months.'); return n; }
+function fee(value, type, principal) { const n = number(value ?? 0, 'Fee'); if (type && !['percent', 'flat'].includes(type)) throw new Error('Choose percent or flat fee.'); return type === 'percent' ? principal * n / 100 : n; }
+function payment(p, r, n) { return r === 0 ? p / n : p * r / -Math.expm1(-n * Math.log1p(r)); }
+function reducingRate(p, emi, n) { let lo = 0, hi = 10; for (let i = 0; i < 100; i++) { const mid = (lo + hi) / 2; if (payment(p, mid, n) > emi) hi = mid; else lo = mid; } return (lo + hi) / 2 * 1200; }
+function rate(input, p, n) { const quoted = number(input.annualRate, 'Interest rate', 0, 100); const type = ['home', 'home loan'].includes(String(input.loanType).trim().toLowerCase()) ? 'reducing' : input.rateType || 'reducing'; if (!['reducing', 'flat'].includes(type)) throw new Error('Choose reducing or flat interest.'); return { quoted, type, annual: type === 'flat' ? reducingRate(p, p * (1 + quoted / 100 * n / 12) / n, n) : quoted }; }
+function xirr(principal, payments, asOfDate) { const start = new Date(asOfDate || new Date().toISOString().slice(0, 10)); if (!Number.isFinite(+start)) throw new Error('Choose a valid disbursal date.'); const y = start.getUTCFullYear(), m = start.getUTCMonth(), d = start.getUTCDate(); const times = payments.map((_, i) => { const last = new Date(Date.UTC(y, m + i + 2, 0)).getUTCDate(); return (Date.UTC(y, m + i + 1, Math.min(d, last)) - Date.UTC(y, m, d)) / 86400000 / 365; }); const npv = (r) => payments.reduce((s, p, i) => s + p / Math.pow(1 + r, times[i]), -principal); let lo = -.999999, hi = 1; while (npv(hi) > 0 && hi < 1e10) hi *= 2; if (npv(hi) > 0) throw new Error('APR is outside the supported range.'); for (let i = 0; i < 150; i++) { const mid = (lo + hi) / 2; if (npv(mid) > 0) lo = mid; else hi = mid; } return (lo + hi) / 2 * 100; }
+function evaluateOffer(input) { const amount = number(input.amount, 'Loan amount', 1), months = term(input.months), r = rate(input, amount, months); const processingFee = fee(input.processingFee, input.processingFeeType, amount), gstRate = number(input.gstRate ?? 18, 'GST', 0, 100), gst = processingFee * gstRate / 100, insurance = number(input.insurance ?? 0, 'Insurance'), otherFees = number(input.otherFees ?? 0, 'Other fees'); const financed = input.insuranceMode === 'financed' ? insurance : 0, financedPrincipal = amount + financed, upfrontFees = processingFee + gst + otherFees + insurance - financed, netDisbursal = amount - upfrontFees; if (netDisbursal <= 0) throw new Error('Upfront fees must be less than the sanctioned loan amount.'); const emi = r.type === 'flat' ? financedPrincipal * (1 + r.quoted / 100 * months / 12) / months : payment(financedPrincipal, r.annual / 1200, months); const interest = emi * months - financedPrincipal, fees = processingFee + gst + insurance + otherFees, cost = interest + fees, total = amount + cost, effectiveAPR = xirr(netDisbursal, Array(months).fill(emi), input.asOfDate); return { ...input, amount, months, rateType: r.type, emi, interest, fees, total, cost, processingFee, gst, gstRate, upfrontFees, netDisbursal, financedPrincipal, effectiveAPR, equivalentReducingRate: r.annual, costPerLakh: cost / amount * 100000 }; }
+function compareOffers(inputs) { if (inputs.length < 2 || inputs.length > 3) throw new Error('Compare two or three offers.'); const offers = inputs.map(evaluateOffer), comparable = offers.every((o) => o.amount === offers[0].amount && o.months === offers[0].months && o.loanType === offers[0].loanType), sameType = offers.every((o) => o.loanType === offers[0].loanType), rankingBasis = comparable ? 'cost' : 'apr'; const sorted = offers.map((o, i) => ({ o, i })).sort((a, b) => comparable ? a.o.cost - b.o.cost : a.o.effectiveAPR - b.o.effectiveAPR || a.o.costPerLakh - b.o.costPerLakh); const saving = comparable ? sorted[1].o.cost - sorted[0].o.cost : sorted[1].o.costPerLakh - sorted[0].o.costPerLakh; return { offers, comparable, rankingBasis, winnerIndex: sameType ? sorted[0].i : null, saving, savingPercent: saving / (comparable ? sorted[1].o.cost : sorted[1].o.costPerLakh) * 100 || 0, aprDelta: sorted[1].o.effectiveAPR - sorted[0].o.effectiveAPR }; }
+function evaluateSurplus(input) { const balance = number(input.balance, 'Outstanding amount', 1), months = term(input.months), r = rate(input, balance, months), annualRate = r.annual, surplus = number(input.surplus, 'Surplus'), bufferMonths = number(input.bufferMonths ?? 3, 'Buffer months', 0, 24); const hasReserve = input.reserve !== undefined && input.reserve !== ''; const hasExpenses = input.monthlyExpenses !== undefined && input.monthlyExpenses !== ''; const reserve = hasReserve ? number(input.reserve, 'Reserve') : hasExpenses ? number(input.monthlyExpenses, 'Monthly expenses') * bufferMonths : 0; const liquidityStatus = !hasReserve && !hasExpenses ? 'unknown' : reserve >= surplus ? 'insufficient' : 'protected', available = Math.max(0, surplus - reserve); const other = number(input.otherFees ?? 0, 'Other fees'), feeValue = number(input.prepaymentFee ?? 0, 'Prepayment fee'), feeRate = input.prepaymentFeeType === 'percent' ? feeValue / 100 : 0, flatFee = input.prepaymentFeeType === 'percent' ? 0 : feeValue; const route = surplus >= balance ? 'foreclosure' : 'part-payment', foreclosureFee = balance * feeRate + flatFee + other, foreclosureShortfall = route === 'foreclosure' ? Math.max(0, balance + foreclosureFee - available) : 0; const prepayment = route === 'foreclosure' ? (foreclosureShortfall === 0 ? balance : 0) : Math.min(balance, Math.max(0, (available - flatFee - other) / (1 + feeRate))), fees = prepayment > 0 ? prepayment * feeRate + flatFee + other : 0; const result = compareLoan({ balance, annualRate, months, prepayment }), baseline = { total: balance + result.baseline.interest, interest: result.baseline.interest, months }; const make = (value, emi) => ({ interest: value.interest, months: value.months, emi: value.months === 0 ? 0 : emi, total: balance + value.interest + fees, saving: result.baseline.interest - value.interest - fees, monthsSaved: months - value.months, monthlyFreed: result.emi - (value.months === 0 ? 0 : emi) }); const shorter = make(result.shorter, result.emi), lower = make(result.lower, result.lower.emi), selected = input.mode === 'emi' ? lower : shorter; const investmentRate = number(input.investmentRate ?? 7, 'Expected gross annual return', -99, 100), taxSlab = number(input.taxSlab ?? 0, 'Tax slab', 0, 60), postTaxInvestmentRate = investmentRate > 0 ? investmentRate * (1 - taxSlab / 100) : investmentRate, monthlyReturn = Math.expm1(Math.log1p(postTaxInvestmentRate / 100) / 12); const annualBenefit = input.loanTaxBenefitEligible === true ? number(input.annualLoanTaxBenefit ?? 0, 'Annual loan tax benefit') : 0; const effectiveLoanRate = 100 * Math.expm1(12 * Math.log1p(annualRate / 1200)); let invested = available, prepayInvested = available - prepayment - fees, remaining = balance - prepayment, baselineTaxBenefit = 0, prepayTaxBenefit = 0; const baselinePayments = []; for (let month = 0; month < months; month++) { invested *= 1 + monthlyReturn; prepayInvested *= 1 + monthlyReturn; const opening = result.baseline.balances[month] ?? 0, baselinePayment = Math.max(0, opening) * (1 + annualRate / 1200) - Math.max(0, result.baseline.balances[month + 1] ?? 0); const prepayInterest = remaining * annualRate / 1200, actual = Math.min(selected.emi, remaining + prepayInterest); remaining = Math.max(0, remaining + prepayInterest - actual); const baseBenefit = Math.min(annualBenefit / 12, opening * annualRate / 1200), preBenefit = Math.min(annualBenefit / 12, prepayInterest); baselineTaxBenefit += baseBenefit; prepayTaxBenefit += preBenefit; baselinePayments.push(baselinePayment - baseBenefit); invested += baseBenefit; prepayInvested += Math.max(0, baselinePayment - actual) + preBenefit; } const postTaxLoanRate = xirr(balance, baselinePayments, input.asOfDate), rateGap = postTaxInvestmentRate - postTaxLoanRate, advantage = invested - prepayInvested; let recommendation = liquidityStatus === 'unknown' ? 'review' : prepayment === 0 ? 'reserve' : advantage > 1 && fees > 0 ? 'invest' : Math.abs(rateGap) <= 1 ? 'tie' : advantage > 1 ? 'invest' : advantage < -1 ? 'prepay' : 'tie'; const currentEMI = input.currentEMI !== undefined && input.currentEMI !== '' ? number(input.currentEMI, 'Current EMI', .01) : null; const emiDifference = currentEMI === null ? 0 : currentEMI - result.emi, emiMismatch = currentEMI !== null && Math.abs(emiDifference) > Math.max(1, result.emi * .01); if (emiMismatch) recommendation = 'review'; return { emi: result.emi, currentEMI, emiDifference, emiMismatch, rateType: r.type, equivalentReducingRate: annualRate, available, reserve, bufferMonths, liquidityStatus, route, foreclosureShortfall, prepayment, fees, baseline, shorter, lower, selected, effectiveLoanRate, postTaxLoanRate, postTaxInvestmentRate, rateGap, baselineTaxBenefit, prepayTaxBenefit, investment: { futureValue: invested, gain: invested - available, prepayFutureValue: prepayInvested, advantage }, recommendation }; }
+function evaluateTermLife(input) { const cover = number(input.cover, 'Sum assured', 1), premium = number(input.premium, 'Premium', 1), age = number(input.age, 'Age', 18, 100), years = term(input.policyTerm), income = input.annualIncome ? number(input.annualIncome, 'Annual income') : 0, liabilities = number(input.liabilities ?? 0, 'Liabilities'), dependents = number(input.dependents ?? 0, 'Dependents', 0, 30), annualPremium = premium * (input.premiumFrequency === 'monthly' ? 12 : 1); if (!Number.isInteger(age) || !Number.isInteger(dependents)) throw new Error('Age and dependents must be whole numbers.'); if (age + years > 120) throw new Error('Policy term cannot extend beyond age 120.'); const targetLow = income ? income * 10 + liabilities : null, targetHigh = income ? income * 15 + liabilities : null; return { cover, annualPremium, age, years, dependents, targetLow, targetHigh, gap: targetLow === null ? null : Math.max(0, targetLow - cover), verdict: targetLow === null ? 'incomplete' : cover < targetLow ? 'gap' : 'within-heuristic', renewalDue: input.dueDate || null }; }
+
+// ---- policyAssist (ported from mockups/finance-native/policyAssist.cjs) ----
+const moneyAmount = (s) => { const match = s.replace(/,/g, '').match(/(?:INR|Rs\.?|₹)?\s*(\d+(?:\.\d+)?)\s*(crore|lakh|lac)?/i); return match ? String(Number(match[1]) * (/^crore$/i.test(match[2]) ? 10000000 : /^(lakh|lac)$/i.test(match[2]) ? 100000 : 1)) : null; };
+function candidates(text) {
+  const lines = text.split(/\n/).map((s) => s.replace(/[*_#|]/g, ' ').replace(/\s+/g, ' ').trim()).filter(Boolean);
+  const rules = [['cover', 'Sum assured', /(?:sum assured|life cover|death benefit)\s*[:\-]?\s*((?:(?:INR|Rs\.?|₹)\s*)?\d[\d,.]*\s*(?:crore|lakh|lac)?)/i, moneyAmount], ['premium', 'Premium', /(?:annual|yearly|monthly)\s+premium\s*[:\-]?\s*((?:(?:INR|Rs\.?|₹)\s*)?\d[\d,.]*)/i, moneyAmount], ['term', 'Policy term', /policy term\s*[:\-]?\s*(\d+)\s*years?/i, (s) => s], ['paymentTerm', 'Premium payment term', /premium (?:payment|paying) term\s*[:\-]?\s*(\d+)\s*years?/i, (s) => s], ['age', 'Policyholder age', /(?:policyholder age|age of (?:the )?life assured)\s*[:\-]?\s*(\d+)/i, (s) => s]];
+  const found = [];
+  for (const [key, label, pattern, parse] of rules) { const matches = lines.flatMap((line) => [...line.matchAll(new RegExp(pattern.source, 'ig'))].map((match) => ({ line, match }))); const unique = [...new Set(matches.map((x) => parse(x.match[1])))]; if (unique.length !== 1 || !unique[0]) continue; if (key === 'premium' && new Set(matches.map((x) => /monthly/i.test(x.match[0]) ? 'monthly' : 'annual')).size > 1) continue; found.push({ key, label, value: unique[0], source: matches[0].line.slice(0, 320) }); if (key === 'premium') found.push({ key: 'frequency', label: 'Premium frequency', value: /monthly/i.test(matches[0].match[0]) ? 'monthly' : 'annual', source: matches[0].line.slice(0, 320) }); }
+  return found;
+}
+// The app's own test fixture (test-fixtures/term-life-assist.pdf), labelled as a sample.
+const SAMPLE_POLICY = 'Fictional term life policy - test fixture\nSum assured: INR 5000000\nAnnual premium: INR 15000\nPolicy term: 30 years\nPremium payment term: 20 years\nPolicyholder age: 30';
+
+// Sketched card outlines in a 100×200 box (rough.js, roughness .35, seeds 3, 12, 19). Stretched by the SVG; strokes stay 2px.
+const SKETCH = [
+  'M0.50 0.61 C20.26 0.71, 39.61 0.47, 99.56 1.41 M1.01 1.27 C26.63 1.27, 52.84 1.37, 99.09 1.09 M99.21 0.56 C98.96 50.88, 99.69 100.66, 99.06 199.48 M99.31 0.86 C99.58 41.42, 99.25 82.28, 98.72 198.66 M98.70 198.77 C74.47 198.96, 50.21 199.79, 1.52 198.57 M98.70 198.84 C66.78 199.33, 34.89 199.05, 1.28 199.04 M1.64 198.70 C0.86 147.23, 0.44 96.05, 1.62 1.13 M1.22 199.34 C0.93 141.33, 0.77 83.40, 0.76 1.33',
+  'M1.10 1.54 C19.96 1.08, 39.95 1.53, 99.16 0.54 M0.72 1.06 C26.20 1.23, 51.23 0.94, 99.01 1.01 M99.15 1.35 C98.52 42.85, 98.63 83.57, 98.54 198.84 M99.20 0.79 C99.23 44.94, 99.33 88.18, 98.95 198.72 M98.52 198.80 C60.39 199.03, 23.56 199.55, 1.01 199.40 M98.88 198.74 C68.50 199.12, 38.24 199.38, 1.09 198.82 M1.47 198.51 C1.49 151.02, 1.21 103.33, 1.38 0.83 M0.86 199.34 C0.75 126.39, 0.78 54.45, 1.10 1.29',
+  'M1.10 0.40 C21.28 0.36, 40.69 0.72, 99.32 0.80 M0.88 0.65 C21.27 0.77, 41.18 1.18, 99.34 1.10 M99.41 0.56 C99.03 66.62, 98.03 132.97, 98.44 198.81 M98.87 1.28 C99.20 60.18, 99.00 119.79, 98.90 199.24 M99.00 198.98 C69.67 199.25, 40.63 198.43, 0.61 199.11 M99.02 198.74 C65.56 198.68, 31.59 198.97, 0.94 199.27 M0.40 198.52 C1.05 149.25, 0.73 100.04, 0.73 1.37 M1.04 199.33 C0.84 137.16, 1.41 75.93, 1.13 1.27'
+];
+
+const newOffer = (name) => ({ name: name || 'Offer C', loanType: 'Personal loan', amount: '500000', annualRate: '11', rateType: 'reducing', tenure: '36', tenureUnit: 'months', processingFee: '1', processingFeeType: 'percent', gstRate: '18', insurance: '0', insuranceFinanced: false, otherFees: '0' });
+const months = (o) => Number(o.tenure) * (o.tenureUnit === 'years' ? 12 : 1);
+function validateProfile(p) {
+  if (p.taxSlab.trim() === '' || !Number.isFinite(Number(p.taxSlab)) || Number(p.taxSlab) < 0 || Number(p.taxSlab) > 50) throw new Error('Enter a tax slab from 0% to 50% in your shared profile.');
+  for (const [k, label] of [['income', 'Annual income'], ['monthlyExpenses', 'Monthly expenses'], ['liabilities', 'Existing liabilities']]) if (p[k] !== '' && (!Number.isFinite(Number(p[k])) || Number(p[k]) < 0)) throw new Error(label + ' must be a non-negative amount in your shared profile.');
+  if (p.dependents !== '' && (!Number.isInteger(Number(p.dependents)) || Number(p.dependents) < 0 || Number(p.dependents) > 30)) throw new Error('Dependents must be a whole number from 0 to 30 in your shared profile.');
+}
+function focusResult(id) { requestAnimationFrame(() => { const el = document.getElementById(id); if (el) { el.focus({ preventScroll: true }); el.scrollIntoView({ block: 'start', behavior: 'auto' }); } }); }
+function setPolicyOpen(open) { const el = document.getElementById('policy-details'); if (el) el.open = open; }
+function scrollToId(id) { const el = document.getElementById(id); if (el) { el.scrollIntoView({ block: 'start', behavior: 'instant' }); if (el.tabIndex === -1) el.focus({ preventScroll: true }); } }
+const rateHintFor = (loanType) => loanType === 'Home loan' ? 'Home loans use reducing balance here.' : 'Reducing assumed. Check your lender’s rate basis; a flat rate is not directly comparable.';
+const yTicks = (max) => [short(max), short(max * 2 / 3), short(max / 3)];
+const pts = (values, max, count) => values.map((v, i) => (i / Math.max(1, count)) * 600 + ' ' + (8 + (1 - Math.max(0, v) / max) * 192).toFixed(1)).join(' ');
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      theme: null,
+      profile: { taxSlab: '20', income: '', dependents: '', liabilities: '', monthlyExpenses: '' },
+      offers: [newOffer('Offer A'), { ...newOffer('Offer B'), annualRate: '10.5', processingFee: '2' }],
+      comparison: null, offerError: '',
+      surplus: { loanType: 'Personal loan', balance: '500000', annualRate: '11', rateType: 'reducing', rateNature: 'fixed', tenure: '36', tenureUnit: 'months', currentEmi: '', surplus: '100000', prepaymentFee: '0', feeType: 'flat', otherFees: '0', investmentRate: '7', investmentPreset: 'fd', mode: 'tenure', emergencyBuffer: '', bufferMonths: '6', annualLoanTaxBenefit: '0' },
+      surplusResult: null, surplusError: '',
+      policy: { cover: '5000000', premium: '15000', frequency: 'annual', term: '30', paymentTerm: '', age: '30', insurer: '', nominee: '', riders: '', exclusions: '', renewalDate: '', incomeMultiple: '12' },
+      policyReviewed: false, policyError: '',
+      assist: { busy: false, found: [], selected: {}, message: '' },
+      active: 'insurance', costStage: 'all', prepayMode: null, prepayMonth: '0', rateMonth: '1'
+    };
+  }
+  componentDidMount() {
+    this.onScroll = () => {
+      if (this.frame) return;
+      this.frame = requestAnimationFrame(() => {
+        this.frame = 0;
+        const sections = [...document.querySelectorAll('.decision-section')];
+        const current = sections.filter((el) => el.getBoundingClientRect().top <= 160).at(-1) || sections[0];
+        if (current && current.id !== this.state.active) this.setState({ active: current.id });
+      });
+    };
+    addEventListener('scroll', this.onScroll, { passive: true });
+  }
+  componentWillUnmount() { removeEventListener('scroll', this.onScroll); cancelAnimationFrame(this.frame); clearTimeout(this.assistTimer); }
+  up(group, key, extra) { return (e) => { const v = e.target.value; this.setState((s) => ({ [group]: { ...s[group], [key]: v }, ...(extra ? extra(s, v) : {}) })); }; }
+  setOffer(i, key) {
+    return (e) => { const v = key === 'insuranceMode' ? e.target.value === 'financed' : e.target.value; const k = key === 'insuranceMode' ? 'insuranceFinanced' : key; this.setState((s) => ({ comparison: null, offers: s.offers.map((o, j) => i === j ? { ...o, [k]: v, ...(k === 'loanType' && v === 'Home loan' ? { rateType: 'reducing' } : {}) } : o) })); };
+  }
+  compare() {
+    try {
+      const comparison = compareOffers(this.state.offers.map((o) => ({ ...o, amount: Number(o.amount), annualRate: Number(o.annualRate), months: months(o), processingFee: Number(o.processingFee), insuranceMode: o.insuranceFinanced ? 'financed' : 'upfront', gstRate: Number(o.gstRate), insurance: Number(o.insurance || 0), otherFees: Number(o.otherFees || 0) })));
+      this.setState({ comparison, offerError: '', rateMonth: '1' }); focusResult('loan-result');
+    } catch (e) { this.setState({ offerError: e.message, comparison: null }); }
+  }
+  assessSurplus() {
+    const { surplus, profile } = this.state;
+    try {
+      validateProfile(profile);
+      const surplusResult = evaluateSurplus({ ...surplus, balance: Number(surplus.balance), annualRate: Number(surplus.annualRate), months: months(surplus), surplus: Number(surplus.surplus), prepaymentFee: Number(surplus.prepaymentFee), prepaymentFeeType: surplus.feeType, otherFees: Number(surplus.otherFees || 0), investmentRate: Number(surplus.investmentRate), taxSlab: Number(profile.taxSlab), monthlyExpenses: profile.monthlyExpenses === '' ? undefined : Number(profile.monthlyExpenses), reserve: surplus.emergencyBuffer === '' ? undefined : Number(surplus.emergencyBuffer), bufferMonths: Number(surplus.bufferMonths), loanTaxBenefitEligible: Number(surplus.annualLoanTaxBenefit) > 0, annualLoanTaxBenefit: Number(surplus.annualLoanTaxBenefit), currentEMI: surplus.currentEmi === '' ? undefined : Number(surplus.currentEmi) });
+      this.setState({ surplusResult, surplusError: '', prepayMode: null, prepayMonth: '0' }); focusResult('surplus-result');
+    } catch (e) { this.setState({ surplusError: e.message, surplusResult: null }); }
+  }
+  reviewPolicy() {
+    const { policy, profile } = this.state;
+    try {
+      validateProfile(profile);
+      evaluateTermLife({ cover: policy.cover, premium: policy.premium, premiumFrequency: policy.frequency, age: policy.age, policyTerm: policy.term, annualIncome: profile.income || undefined, liabilities: profile.liabilities || 0, dependents: profile.dependents || 0, dueDate: policy.renewalDate || undefined });
+      if (!Number.isInteger(Number(policy.age)) || !Number.isInteger(Number(policy.term)) || Number(policy.age) + Number(policy.term) > 120) throw new Error('Use a whole-number age and policy term ending by age 120.');
+      if (policy.paymentTerm && (!Number.isInteger(Number(policy.paymentTerm)) || Number(policy.paymentTerm) < 1 || Number(policy.paymentTerm) > Number(policy.term))) throw new Error('Premium payment term must be a whole number of years within the policy term.');
+      this.setState({ policyError: '', policyReviewed: true }); setPolicyOpen(false); focusResult('policy-result');
+    } catch (e) { this.setState({ policyError: e.message, policyReviewed: false }); }
+  }
+  readSample(fileName) {
+    clearTimeout(this.assistTimer);
+    this.setState({ assist: { busy: true, found: [], selected: {}, message: '' } });
+    this.assistTimer = setTimeout(() => {
+      const found = candidates(SAMPLE_POLICY);
+      this.setState({ assist: { busy: false, found, selected: {}, message: (fileName ? 'Prototype reader: showing the labelled sample policy, not ' + fileName + '. ' : '') + (found.length ? 'Check the source, then select values to use.' : 'No clear values found. Enter details manually.') } });
+    }, 700);
+  }
+  renderVals() {
+    const s = this.state, theme = s.theme || this.props.theme || 'light', isDark = theme === 'dark';
+    const p = s.policy, pr = s.profile, su = s.surplus;
+    const income = Number(pr.income), liabilities = Number(pr.liabilities || 0), target = income * Number(p.incomeMultiple) + liabilities, gap = Math.max(0, target - Number(p.cover));
+    const policyReset = () => ({ policyReviewed: false, policyError: '' });
+    const on = {
+      noop: () => {},
+      review: () => this.reviewPolicy(),
+      compare: () => this.compare(),
+      assess: () => this.assessSurplus(),
+      addOffer: () => this.setState((st) => ({ offers: [...st.offers, newOffer()], comparison: null })),
+      preset: (e) => { const v = e.target.value; this.setState((st) => ({ surplus: { ...st.surplus, investmentPreset: v, investmentRate: { fd: '7', debt: '8', equity: '11' }[v] }, surplusResult: null })); },
+      rateMonth: (e) => this.setState({ rateMonth: e.target.value }),
+      prepayMonth: (e) => this.setState({ prepayMonth: e.target.value }),
+      policy: Object.fromEntries(['cover', 'premium', 'frequency', 'term', 'age', 'paymentTerm', 'insurer', 'nominee', 'riders', 'exclusions', 'renewalDate', 'incomeMultiple'].map((k) => [k, this.up('policy', k, k === 'incomeMultiple' ? null : policyReset)])),
+      profile: Object.fromEntries(['taxSlab', 'income', 'dependents', 'liabilities', 'monthlyExpenses'].map((k) => [k, this.up('profile', k, () => ({ surplusResult: null, policyReviewed: false }))])),
+      surplus: Object.fromEntries(['loanType', 'balance', 'annualRate', 'rateType', 'rateNature', 'tenure', 'tenureUnit', 'currentEmi', 'surplus', 'prepaymentFee', 'feeType', 'otherFees', 'emergencyBuffer', 'bufferMonths', 'investmentRate', 'mode', 'annualLoanTaxBenefit'].map((k) => [k, this.up('surplus', k, (st, v) => {
+        const next = { ...st.surplus, [k]: v }; const patch = { surplusResult: null };
+        if (k === 'loanType' && v === 'Home loan') patch.surplus = { ...next, rateType: 'reducing', ...(next.rateNature === 'floating' ? { prepaymentFee: '0' } : {}) };
+        if (k === 'rateNature' && v === 'floating' && next.loanType === 'Home loan') patch.surplus = { ...next, prepaymentFee: '0' };
+        return patch;
+      })]))
+    };
+    const nav = {
+      insurance: s.active === 'insurance' ? 'location' : undefined, compare: s.active === 'compare' ? 'location' : undefined, surplus: s.active === 'surplus' ? 'location' : undefined,
+      goTop: (e) => { e.preventDefault(); scrollTo({ top: 0, behavior: 'instant' }); },
+      goInsurance: (e) => { e.preventDefault(); scrollToId('insurance'); }, goCompare: (e) => { e.preventDefault(); scrollToId('compare'); }, goSurplus: (e) => { e.preventDefault(); scrollToId('surplus'); }, goProfile: (e) => { e.preventDefault(); scrollToId('profile-title'); }
+    };
+    const a = s.assist;
+    const assist = {
+      busy: a.busy, hasMessage: !!a.message, message: a.message, hasFound: a.found.length > 0,
+      found: a.found.map((item) => ({ ...item, checked: !!a.selected[item.key], toggle: (e) => { const checked = e.target.checked; this.setState((st) => ({ assist: { ...st.assist, selected: { ...st.assist.selected, [item.key]: checked } } })); } })),
+      applyDisabled: !Object.values(a.selected).some(Boolean),
+      choose: (e) => { const file = e.target.files && e.target.files[0]; if (!file) return; const name = file.name; e.target.value = ''; if (!name.toLowerCase().endsWith('.pdf') || file.size === 0 || file.size > 5 * 1024 * 1024) { this.setState({ assist: { busy: false, found: [], selected: {}, message: 'Choose a PDF between 1 byte and 5 MB.' } }); return; } this.readSample(name); },
+      sample: () => this.readSample(''),
+      clear: () => { clearTimeout(this.assistTimer); this.setState({ assist: { busy: false, found: [], selected: {}, message: '' } }); },
+      apply: () => {
+        if (a.selected.premium && !a.selected.frequency) { this.setState((st) => ({ assist: { ...st.assist, message: 'Confirm the premium frequency too before applying its amount.' } })); return; }
+        const map = { term: 'term', paymentTerm: 'paymentTerm', cover: 'cover', premium: 'premium', frequency: 'frequency', age: 'age' };
+        const patch = Object.fromEntries(a.found.filter((f) => a.selected[f.key]).map((f) => [map[f.key] || f.key, String(f.value)]));
+        this.setState((st) => ({ policy: { ...st.policy, ...patch }, policyReviewed: false, assist: { ...st.assist, message: 'Values applied. Review the details below.' } })); setPolicyOpen(true);
+      }
+    };
+    const pastDue = p.renewalDate && new Date(p.renewalDate + 'T23:59:59') < new Date();
+    const policyResult = {
+      hasError: !!s.policyError, error: s.policyError, show: s.policyReviewed,
+      head: !income ? 'Add annual income to check adequacy.' : gap > 0 ? 'Your cover is below this rule-of-thumb target.' : 'Your cover meets this rule-of-thumb target.',
+      cover: money(Number(p.cover)), premium: money(Number(p.premium)) + ' · ' + p.frequency, term: p.term + ' years', paymentTerm: p.paymentTerm ? p.paymentTerm + ' years' : 'Confirm in policy', due: p.renewalDate || 'Not entered',
+      hasIncome: income > 0, noIncome: !(income > 0), gap: money(gap), target: money(target), endAge: Number(p.age) + Number(p.term),
+      dependentsNote: pr.dependents ? 'Dependents entered: ' + pr.dependents + '. Budget their needs separately.' : 'Add dependents for a fuller review.',
+      nomineeNote: p.nominee ? 'Nominee recorded: ' + p.nominee : 'Gap to check: nominee details are missing.',
+      exclusionsNote: p.exclusions ? 'Waiting periods / exclusions: ' + p.exclusions : 'Gap to check: waiting periods and exclusions have not been confirmed.',
+      ridersNote: p.riders ? 'Riders: ' + p.riders : 'No riders entered. Check whether any additional benefits are attached.',
+      dueNote: p.renewalDate ? 'Next premium date: ' + p.renewalDate + '. ' + (pastDue ? 'This date has passed. Confirm payment and policy status with the insurer.' : 'Check the insurer’s grace period and keep the premium funded.') : 'Add a premium due date to flag upcoming or overdue payments. No lapse status can be inferred without it.',
+      paymentTermTooLong: !!p.paymentTerm && Number(p.paymentTerm) > Number(p.term)
+    };
+    const offers = s.offers.map((o, i) => ({
+      ...o, heading: 'Offer ' + String.fromCharCode(65 + i), sketch: SKETCH[i % 3], removable: s.offers.length > 2, isHome: o.loanType === 'Home loan', rateShown: o.loanType === 'Home loan' ? 'reducing' : o.rateType, rateStatus: o.loanType === 'Home loan' ? 'Locked' : 'Default · editable', rateHint: rateHintFor(o.loanType), hasInsurance: Number(o.insurance) > 0, insuranceMode: o.insuranceFinanced ? 'financed' : 'upfront',
+      remove: () => this.setState((st) => ({ offers: st.offers.filter((_, j) => j !== i), comparison: null })),
+      set: Object.fromEntries(['name', 'loanType', 'amount', 'annualRate', 'rateType', 'tenure', 'tenureUnit', 'processingFee', 'processingFeeType', 'gstRate', 'insurance', 'insuranceMode', 'otherFees'].map((k) => [k, this.setOffer(i, k)]))
+    }));
+    const c = s.comparison;
+    let loan = { hasError: !!s.offerError, error: s.offerError, show: !!c, offers: [] }, cost = { bars: [], ticks: [], isInterest: s.costStage === 'interest', isAll: s.costStage === 'all', pickInterest: () => this.setState({ costStage: 'interest' }), pickAll: () => this.setState({ costStage: 'all' }), note: '' }, rate = { flatPts: '', reducingPts: '', mx: 0 };
+    if (c) {
+      const winner = c.winnerIndex === null ? null : c.offers[c.winnerIndex], apr = c.rankingBasis === 'apr', tied = apr ? Math.abs(c.aprDelta) < 0.01 : Math.abs(c.saving) < 1;
+      loan = { ...loan, hasWinner: !!winner,
+        head: !winner ? 'Compare the same loan type before ranking.' : tied ? 'These offers are effectively tied.' : winner.name + (apr ? ' has the lower effective APR.' : ' has the lower borrowing cost.'),
+        sub: !winner ? 'The figures are shown, but the loans serve different needs.' : apr ? 'Amounts or tenures differ, so effective APR is the primary comparison.' : 'The offers share a principal and tenure, so borrowing cost is directly comparable.',
+        delta1: apr ? Number(c.aprDelta).toFixed(2) + ' pp' : money(Math.abs(c.saving)), delta1Label: apr ? 'APR difference to next offer' : 'Less borrowing cost than next offer',
+        delta2: apr ? money(Math.abs(c.saving)) : pct(c.savingPercent), delta2Label: apr ? (c.saving < 0 ? 'Higher cost per lakh despite lower APR' : 'Lower cost per lakh') : 'Reduction in borrowing cost',
+        offers: c.offers.map((o) => ({ name: o.name, emi: money(o.emi), interest: money(o.interest), netDisbursal: money(o.netDisbursal), cost: money(o.cost), apr: pct(o.effectiveAPR), costPerLakh: money(o.costPerLakh), term: o.months + ' months', isFlat: o.rateType === 'flat', equivalent: pct(o.equivalentReducingRate) }))
+      };
+      const max = Math.max(1, ...c.offers.map((o) => o.cost)) * 1.08, all = s.costStage === 'all';
+      cost = { ...cost, bars: c.offers.map((o) => ({ name: o.name, interestPct: (o.interest / max * 100).toFixed(2), feesPct: ((all ? o.fees : 0) / max * 100).toFixed(2), total: money(o.interest + (all ? o.fees : 0)), detail: all ? 'Interest ' + money(o.interest) + ' + fees ' + money(o.fees) : 'Interest before fees', meta: o.months + ' months · principal ' + money(o.amount) })), ticks: [0, 1, 2, 3, 4].map((i) => short(max * i / 4)),
+        note: c.rankingBasis === 'apr' ? 'Amounts or terms differ: keep effective APR as the primary ranking. A shorter cost bar does not determine the recommendation.' : 'A lower interest bill can be outweighed by higher fees. Including fees restores the cost used by the recommendation.' };
+      const first = c.offers[0], common = { ...first, loanType: 'Personal loan', processingFee: 0, insurance: 0, otherFees: 0, insuranceMode: 'upfront' };
+      const flat = evaluateOffer({ ...common, rateType: 'flat' }), reducing = evaluateOffer({ ...common, rateType: 'reducing' }), schedule = compareLoan({ balance: first.amount, annualRate: first.annualRate, months: first.months, prepayment: 0 });
+      const flatMonthly = first.amount * first.annualRate / 1200, reducingSeries = Array.from({ length: first.months }, (_, i) => schedule.baseline.balances[i] * first.annualRate / 1200), yMax = Math.max(1, flatMonthly) * 1.08, month = Math.min(Math.max(1, Number(s.rateMonth) || 1), first.months);
+      rate = { name: first.name, amount: money(first.amount), rate: first.annualRate, months: first.months, month, xMid: Math.round((1 + first.months) / 2), flatPts: pts(Array(first.months).fill(flatMonthly), yMax, first.months - 1), reducingPts: pts(reducingSeries, yMax, first.months - 1), mx: ((month - 1) / Math.max(1, first.months - 1) * 600).toFixed(1), y0: yTicks(yMax)[0], y1: yTicks(yMax)[1], y2: yTicks(yMax)[2], flatNow: money(flatMonthly), reducingNow: money(reducingSeries[month - 1]), flatTotal: money(flat.interest), reducingTotal: money(reducing.interest), flatEmi: money(flat.emi), reducingEmi: money(reducing.emi) };
+    }
+    const foreclosure = Number(su.surplus) >= Number(su.balance);
+    const surplusView = { isHome: su.loanType === 'Home loan', rateShown: su.loanType === 'Home loan' ? 'reducing' : su.rateType, rateStatus: su.loanType === 'Home loan' ? 'Locked' : 'Default · editable', rateHint: rateHintFor(su.loanType), isFlat: su.loanType !== 'Home loan' && su.rateType === 'flat', pathNote: foreclosure ? 'Foreclosure path · enough surplus to cover principal before fees and buffer.' : 'Part-payment path · choose a smaller EMI or an earlier finish.', partPayment: !foreclosure, feeLabel: foreclosure ? 'Foreclosure fee' : 'Part-payment fee', floatingHome: su.loanType === 'Home loan' && su.rateNature === 'floating' };
+    const r = s.surplusResult;
+    let sr = { hasError: !!s.surplusError, error: s.surplusError, show: !!r }, prepay = { basePts: '', prepayPts: '', mx: 0, isShorter: true, isLower: false, pickShorter: () => this.setState({ prepayMode: 'shorter' }), pickLower: () => this.setState({ prepayMode: 'lower' }) };
+    if (r) {
+      const head = { reserve: 'Protect your buffer before prepaying.', review: 'Confirm these details before acting.', tie: 'You are in the crossover band.', invest: 'Investing leads on the return assumption.', prepay: 'Prepayment has the stronger estimated return.' }[r.recommendation];
+      const reason = r.liquidityStatus === 'unknown' ? 'Liquidity is unverified. Enter monthly essentials or an explicit emergency buffer before relying on a recommendation.' : r.emiMismatch ? 'The entered EMI differs from the loan model by more than 1%. Reconcile the lender statement first.' : r.foreclosureShortfall > 0 ? 'Fees and the protected buffer leave ' + money(r.foreclosureShortfall) + ' short of full foreclosure.' : r.recommendation === 'reserve' ? 'Your surplus does not leave deployable money after the protected buffer and fees.' : r.recommendation === 'tie' ? 'The post-tax return and loan cost are within one percentage point.' : r.recommendation === 'invest' && r.fees > 0 && r.rateGap <= 0 ? 'Prepayment fees outweigh the modeled interest benefit.' : 'The post-tax loan cost is ' + pct(r.postTaxLoanRate) + ' and the illustrative post-tax return is ' + pct(r.postTaxInvestmentRate) + '.';
+      sr = { ...sr, head, reason, advantage: money(Math.abs(r.investment.advantage)), advantageLabel: r.investment.advantage >= 0 ? 'Projected extra end wealth from investing' : 'Projected extra end wealth from prepaying', rateGap: Math.abs(r.rateGap).toFixed(2),
+        reserveNote: r.liquidityStatus === 'unknown' ? 'Buffer is not set; the figures assume no reserve.' : 'Reserve protected: ' + money(r.reserve) + '.', available: money(r.available), emiNote: r.emiMismatch ? 'EMI discrepancy: ' + money(Math.abs(r.emiDifference)) + '.' : '',
+        baseTotal: money(r.baseline.total), emi: money(r.emi), baseMonths: r.baseline.months,
+        shorterHead: foreclosure ? (r.foreclosureShortfall > 0 ? 'Closure not affordable' : 'Foreclose the loan') : 'Prepay · reduce tenure', shorterTotal: money(r.shorter.total), shorterSaving: money(r.shorter.saving), monthsSaved: r.shorter.monthsSaved,
+        lowerHead: foreclosure ? (r.foreclosureShortfall > 0 ? 'Loan remains open' : 'After full closure') : 'Prepay · reduce EMI', lowerEmi: money(r.lower.emi), monthlyFreed: money(r.lower.monthlyFreed), lowerSaving: money(r.lower.saving),
+        futureValue: money(r.investment.futureValue), prepayFutureValue: money(r.investment.prepayFutureValue) };
+      const balance = Number(su.balance), mode = s.prepayMode || (r.selected === r.lower ? 'lower' : 'shorter');
+      const schedule = compareLoan({ balance, annualRate: r.equivalentReducingRate, months: r.baseline.months, prepayment: r.prepayment });
+      const n = r.baseline.months, base = Array.from({ length: n + 1 }, (_, i) => schedule.baseline.balances[i] || 0), pre = Array.from({ length: n + 1 }, (_, i) => schedule[mode].balances[i] || 0);
+      const month = Math.min(Math.max(0, Number(s.prepayMonth) || 0), n);
+      prepay = { ...prepay, isShorter: mode === 'shorter', isLower: mode === 'lower', months: n, month, xMid: Math.round(n / 2), y0: yTicks(balance)[0], y1: yTicks(balance)[1], y2: yTicks(balance)[2],
+        intro: (r.liquidityStatus === 'unknown' ? 'Buffer not set: this illustration assumes no reserve. ' : '') + (r.emiMismatch ? 'Your entered EMI does not match this model. ' : '') + 'Principal prepaid: ' + money(r.prepayment) + '. Fees: ' + money(r.fees) + '. ' + (r.rateType === 'flat' ? 'Uses the same equivalent reducing-rate conversion as the result.' : ''),
+        basePts: pts(base, balance, n), prepayPts: pts(pre, balance, n), mx: (month / Math.max(1, n) * 600).toFixed(1), baseNow: money(base[month]), prepayNow: money(pre[month]), payoffMonths: schedule[mode].months };
+    }
+    return {
+      theme, isDark, themeLabel: isDark ? 'Dark' : 'Light', toggleTheme: () => this.setState({ theme: isDark ? 'light' : 'dark' }),
+      nav, on, assist, policy: p, profile: pr, surplus: su, policyResult, offers, offerCount: s.offers.length, canAddOffer: s.offers.length < 3, loan, cost, rate, surplusView, sr, prepay
+    };
+  }
+}
+</script>
+</body>
+</html>

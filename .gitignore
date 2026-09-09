@@ -13,3 +13,15 @@ downloads/
 **/.expo*/
 **/dist*/
 **/public/vendor/anydoc/
+
+# Machine-specific backups, signing files, and generated export archives.
+AGENTS.md.before-symlink
+.DS_Store
+*.log
+*.pem
+*.key
+*.p8
+*.p12
+*.mobileprovision
+mockups/money-ops-logo-public.tar.gz
+mockups/money-ops-logo-public/

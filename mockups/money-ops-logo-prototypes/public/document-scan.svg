@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 260" role="img" aria-labelledby="title desc">
+  <title id="title">Money Ops document scanner</title>
+  <desc id="desc">A document with a horizontal scanning line moving down and back up.</desc>
+  <style>
+    :root { --brand: #304b3c; }
+    .scan { animation: scan 3s ease-in-out infinite alternate; }
+    @keyframes scan { from { transform: translateY(-36px); } to { transform: translateY(58px); } }
+    @media (prefers-reduced-motion: reduce) { .scan { animation: none; } }
+  </style>
+  <defs>
+    <mask id="cut" maskUnits="userSpaceOnUse" x="0" y="0" width="240" height="260">
+      <rect width="240" height="260" fill="white"/>
+      <rect x="55" y="65" width="75" height="16" rx="8" fill="black"/>
+      <rect x="55" y="96" width="75" height="16" rx="8" fill="black"/>
+      <rect class="scan" x="31" y="142" width="178" height="12" fill="black"/>
+    </mask>
+  </defs>
+  <g fill="var(--brand)">
+    <path mask="url(#cut)" d="M57 22H138Q142 22 142 27V66Q142 85 162 85H202Q208 85 208 91V218Q208 242 183 242H57Q32 242 32 218V47Q32 22 57 22Z"/>
+    <path d="M153 27Q153 20 160 26L205 71Q211 78 202 78H165Q153 78 153 66Z"/>
+    <g class="scan">
+      <path d="M32 138H20A10 10 0 0 0 20 158H32Z"/>
+      <path d="M208 138H220A10 10 0 0 1 220 158H208Z"/>
+    </g>
+  </g>
+</svg>

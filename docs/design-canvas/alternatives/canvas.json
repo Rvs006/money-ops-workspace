@@ -1,0 +1,19 @@
+{
+  "pages": [
+    { "id": "page-1", "name": "Screens" },
+    { "id": "page-2", "name": "Marks and controls" }
+  ],
+  "artboards": [
+    { "file": "Main.dc.html", "title": "Current · reference", "x": 0, "y": 0, "w": 1440, "h": 1280, "page": "page-1" },
+    { "file": "OptionA.dc.html", "title": "A · Sketchbook", "x": 1540, "y": 0, "w": 1440, "h": 1400, "page": "page-1" },
+    { "file": "OptionB.dc.html", "title": "B · Ledger", "x": 3080, "y": 0, "w": 1440, "h": 1140, "page": "page-1" },
+    { "file": "OptionC.dc.html", "title": "C · Phone-first", "x": 0, "y": 1560, "w": 390, "h": 1040, "page": "page-1" },
+    { "file": "OptionD.dc.html", "title": "D · Split workspace", "x": 500, "y": 1560, "w": 1440, "h": 1140, "page": "page-1" },
+    { "file": "Marks.dc.html", "title": "Marks", "x": 0, "y": 0, "w": 1240, "h": 900, "page": "page-2" },
+    { "file": "Controls.dc.html", "title": "Drawably controls", "x": 1340, "y": 0, "w": 1240, "h": 900, "page": "page-2" }
+  ],
+  "annotations": [
+    { "id": "axes", "x": 2060, "y": 1560, "w": 360, "text": "One axis per option, same tokens throughout.\nA Sketchbook: texture. Pen on every surface, hachure wash on the key figure.\nB Ledger: density. Tonal rows, 42px figure, no wash panel.\nC Phone-first: scale. Mark as hero, full-width action, bottom section switcher.\nD Split: layout. Inputs left, live answer right, no disclosure gate.", "page": "page-1" }
+  ],
+  "launch": { "view": "canvas", "page": "page-1" }
+}

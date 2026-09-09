@@ -1,0 +1,18 @@
+{
+  "name": "money-ops-logo-lab",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "export-assets": "node scripts/export-assets.js"
+  },
+  "dependencies": {
+    "dialkit": "^2.0.1"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "vite": "^7.1.7"
+  }
+}
