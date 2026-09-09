@@ -1,0 +1,15 @@
+# ProductOS source materials stay local; generated project documents can be tracked.
+productos/
+
+# Local tools, credentials and generated previews.
+.vercel/
+.env
+.env.*
+.agents/
+.claude/
+.playwright-mcp/
+downloads/
+**/node_modules/
+**/.expo*/
+**/dist*/
+**/public/vendor/anydoc/

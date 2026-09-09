@@ -1,0 +1,107 @@
+/* Workspace refinements use the app's existing role and spacing tokens. */
+.onepage {
+  --workspace-chevron-size: 14px;
+}
+
+.onepage .workspace-trail {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  margin: 0 0 var(--s4);
+  color: var(--muted);
+  font-size: var(--small);
+}
+
+.onepage .workspace-trail a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--s12);
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.onepage .workspace-trail a[aria-current="location"] {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.onepage .workspace-trail a:hover {
+  color: var(--blue);
+}
+
+.onepage .shared-profile {
+  margin: var(--s6) 0 var(--s8);
+  padding: 0;
+  background: transparent;
+  scroll-margin-top: calc(var(--s12) * 2);
+}
+
+.onepage .shared-profile .input-disclosure {
+  padding: 0;
+}
+
+.onepage .shared-profile summary {
+  display: grid;
+  grid-template-columns: var(--workspace-chevron-size) minmax(0, 1fr);
+  gap: var(--s1);
+  align-items: start;
+  padding: var(--s3) 0;
+}
+
+.onepage .shared-profile summary::before {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+  width: var(--workspace-chevron-size);
+  height: var(--workspace-chevron-size);
+}
+
+.onepage .shared-profile summary > span {
+  grid-column: 2;
+  grid-row: 1;
+  color: var(--ink);
+  font-size: var(--body);
+  font-weight: 700;
+}
+
+.onepage .shared-profile summary small {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.onepage .shared-profile .disclosure-content {
+  padding: var(--s3) 0 0;
+}
+
+.onepage .shared-profile:focus {
+  outline: none;
+}
+
+.onepage .shared-profile:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: var(--s2);
+  border-radius: var(--s2);
+}
+
+.onepage .field small a,
+.onepage .recommendation a {
+  color: var(--blue);
+}
+
+.onepage .decision-section {
+  margin-top: var(--s8);
+}
+
+.onepage #insurance.decision-section {
+  margin-top: var(--s6);
+}
+
+.onepage .section-heading {
+  margin-bottom: var(--s4);
+}
+
+@media (max-width: 480px) {
+  .onepage .workspace-trail {
+    margin-bottom: var(--s3);
+  }
+}

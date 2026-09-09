@@ -1,0 +1,7 @@
+.hover-logo{--logo-width:64px;--logo-height:70.4px;position:relative;display:inline-block;width:var(--logo-width);height:var(--logo-height);flex:none;cursor:pointer;vertical-align:middle;touch-action:pan-y}
+.hover-logo>img{display:block;width:100%;height:100%;object-fit:contain}
+.hover-logo>canvas{position:absolute;width:120%;height:118.182%;left:-10%;top:-9.091%;pointer-events:none;visibility:hidden}
+.hover-logo--dots>img{visibility:hidden}.hover-logo--dots>canvas{visibility:visible}
+.hover-logo:focus-visible{outline:2px solid var(--blue,#1947c7);outline-offset:6px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){.hover-logo>canvas{display:none}.hover-logo--dots>img{visibility:visible}}
+

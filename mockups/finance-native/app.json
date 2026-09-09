@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "version": "1.0.0",
+    "userInterfaceStyle": "light",
+    "orientation": "portrait",
+    "slug": "money-ops",
+    "icon": "./assets/icon.png",
+    "web": { "favicon": "./assets/favicon.png" },
+    "ios": {
+      "supportsTablet": true
+    },
+    "name": "Money Ops"
+  }
+}
